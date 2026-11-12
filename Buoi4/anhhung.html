@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Anh Hùng Javascript - Đấu Trường Rồng Già</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(rgba(10, 5, 15, 0.82), rgba(20, 5, 10, 0.9)), url('images/wanda.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 80, 120, 0.4);
+            border-radius: 12px;
+            padding: 12px 24px;
+            margin-bottom: 18px;
+            width: 100%;
+            max-width: 960px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-header h2 {
+            margin: 0 0 6px 0;
+            color: #ff4d6d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-header p {
+            margin: 4px 0;
+            font-size: 15px;
+            color: #e0e0e0;
+        }
+
+        /* Sân đấu chính */
+        .arena {
+            position: relative;
+            width: 100%;
+            max-width: 960px;
+            background: radial-gradient(circle at center, #2b1025 0%, #120813 100%);
+            border: 2px solid #ff4d6d;
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(255, 40, 80, 0.35);
+        }
+
+        .fighter-box {
+            width: 38%;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            transition: transform 0.2s;
+        }
+
+        .avatar-frame {
+            width: 170px;
+            height: 170px;
+            margin: 0 auto 12px auto;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid #ff2a55;
+            box-shadow: 0 0 25px rgba(255, 42, 85, 0.8);
+            background: #1a0b18;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dragon-frame {
+            border-color: #ff9800;
+            box-shadow: 0 0 25px rgba(255, 152, 0, 0.8);
+        }
+
+        .avatar-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .fighter-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        /* Thanh máu HP */
+        .hp-bar-bg {
+            width: 100%;
+            height: 22px;
+            background: #333;
+            border-radius: 11px;
+            overflow: hidden;
+            border: 1px solid #666;
+            margin-bottom: 6px;
+        }
+
+        .hp-bar-fill {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, #00e676, #00c853);
+            transition: width 0.35s ease;
+        }
+
+        .dragon-hp-fill {
+            background: linear-gradient(90deg, #ff5722, #ff9800);
+        }
+
+        .hp-text {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .stats-badge {
+            font-size: 13px;
+            background: rgba(0, 0, 0, 0.45);
+            padding: 6px 10px;
+            border-radius: 8px;
+            color: #ffd54f;
+        }
+
+        .vs-badge {
+            font-size: 36px;
+            font-weight: 900;
+            color: #ff4d6d;
+            text-shadow: 0 0 15px #ff0040;
+            z-index: 2;
+        }
+
+        /* Đạn phép thuật & Cầu lửa */
+        .projectile {
+            position: absolute;
+            top: 42%;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .hero-orb {
+            left: 22%;
+            background: radial-gradient(circle, #fff, #ff1744, #880e4f);
+            box-shadow: 0 0 25px #ff1744, 0 0 45px #ff1744;
+        }
+
+        .dragon-fire {
+            right: 22%;
+            background: radial-gradient(circle, #fff, #ff9100, #dd2c00);
+            box-shadow: 0 0 25px #ff6d00, 0 0 45px #dd2c00;
+        }
+
+        /* Chữ sát thương / né đòn bay lên */
+        .floating-text {
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            font-weight: 900;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 10;
+            text-shadow: 2px 2px 4px #000;
+            white-space: nowrap;
+        }
+
+        /* Hiệu ứng Animation */
+        @keyframes heroAttackAnim {
+            0% { transform: translateX(0); }
+            40% { transform: translateX(70px) scale(1.08); }
+            100% { transform: translateX(0); }
+        }
+
+        @keyframes dragonAttackAnim {
+            0% { transform: translateX(0); }
+            40% { transform: translateX(-70px) scale(1.08); }
+            100% { transform: translateX(0); }
+        }
+
+        @keyframes shootRight {
+            0% { left: 22%; opacity: 1; transform: scale(0.7); }
+            80% { left: 72%; opacity: 1; transform: scale(1.3); }
+            100% { left: 76%; opacity: 0; transform: scale(1.8); }
+        }
+
+        @keyframes shootLeft {
+            0% { right: 22%; opacity: 1; transform: scale(0.7); }
+            80% { right: 72%; opacity: 1; transform: scale(1.3); }
+            100% { right: 76%; opacity: 0; transform: scale(1.8); }
+        }
+
+        @keyframes hurtShake {
+            0%, 100% { transform: translateX(0); filter: brightness(1); }
+            20% { transform: translateX(-16px); filter: brightness(2) sepia(1) hue-rotate(-50deg) saturate(6); }
+            40% { transform: translateX(16px); }
+            60% { transform: translateX(-12px); }
+            80% { transform: translateX(12px); }
+        }
+
+        @keyframes dodgeAnim {
+            0%, 100% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(-35px) scale(0.92); opacity: 0.55; }
+        }
+
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translate(-50%, 0) scale(0.9); }
+            100% { opacity: 0; transform: translate(-50%, -65px) scale(1.2); }
+        }
+
+        .anim-hero-attack { animation: heroAttackAnim 0.45s ease; }
+        .anim-dragon-attack { animation: dragonAttackAnim 0.45s ease; }
+        .anim-shoot-right { animation: shootRight 0.45s ease-out forwards; }
+        .anim-shoot-left { animation: shootLeft 0.45s ease-out forwards; }
+        .anim-hurt { animation: hurtShake 0.45s ease; }
+        .anim-dodge { animation: dodgeAnim 0.45s ease; }
+        .anim-float { animation: floatUp 0.9s ease-out forwards; }
+
+        /* Nút điều khiển */
+        .controls {
+            margin: 18px 0;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
+            padding: 12px 22px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.15s, opacity 0.15s;
+        }
+
+        button:hover:not(:disabled) {
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
+        #btnAttack { background: #ff1744; color: white; box-shadow: 0 4px 12px rgba(255, 23, 68, 0.4); }
+        #btnAuto { background: #ff9100; color: #111; }
+        #btnReset { background: #00e676; color: #111; }
+        #btnSound { background: #37474f; color: white; }
+
+        /* Lịch sử trận đấu */
+        .log-panel {
+            width: 100%;
+            max-width: 960px;
+            background: rgba(0, 0, 0, 0.72);
+            border: 1px solid #555;
+            border-radius: 12px;
+            padding: 14px 18px;
+        }
+
+        .log-panel h3 {
+            margin: 0 0 10px 0;
+            font-size: 16px;
+            color: #ffd54f;
+        }
+
+        #battleLog {
+            height: 180px;
+            overflow-y: auto;
+            font-size: 14px;
+            line-height: 1.6;
+            padding-right: 6px;
+        }
+
+        .log-hero { color: #ff80ab; }
+        .log-dragon { color: #ffb74d; }
+        .log-crit { color: #ff5252; font-weight: bold; }
+        .log-dodge { color: #80deea; font-style: italic; }
+        .log-win { color: #69f0ae; font-size: 16px; font-weight: bold; }
+        .log-lose { color: #ff5252; font-size: 16px; font-weight: bold; }
+    </style>
+</head>
+
+<body>
+    <div class="hero-header">
+        <h2>Đấu Trường Sinh Tử – Anh Hùng JavaScript</h2>
+        <p id="heroIntro"></p>
+        <p id="heroStatus"></p>
+    </div>
+
+    <div class="arena" id="arena">
+        <!-- Nhân vật Anh Hùng -->
+        <div class="fighter-box" id="heroBox">
+            <div class="avatar-frame">
+                <img src="images/wanda.jpg" alt="Anh Hùng Wanda">
+            </div>
+            <div class="fighter-name" id="heroTitle">Anh Hùng</div>
+            <div class="hp-bar-bg">
+                <div class="hp-bar-fill" id="heroHpBar"></div>
+            </div>
+            <div class="hp-text" id="heroHpText">HP: 105 / 105</div>
+            <div class="stats-badge" id="heroStatsText">STR: 59 | AGI: 78 | INT: 28</div>
+            <div class="floating-text" id="heroFloat"></div>
+        </div>
+
+        <div class="vs-badge">VS</div>
+
+        <!-- Quái vật Rồng Già (SVG trực tiếp) -->
+        <div class="fighter-box" id="dragonBox">
+            <div class="avatar-frame dragon-frame">
+                <svg viewBox="0 0 120 120" width="135" height="135">
+                    <defs>
+                        <linearGradient id="dragonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#ff6d00" />
+                            <stop offset="100%" stop-color="#b71c1c" />
+                        </linearGradient>
+                    </defs>
+                    <!-- Cánh rồng -->
+                    <path d="M20,55 Q5,25 35,35 Q45,20 55,45 Z" fill="#d84315" />
+                    <path d="M100,55 Q115,25 85,35 Q75,20 65,45 Z" fill="#d84315" />
+                    <!-- Sừng -->
+                    <polygon points="42,32 32,10 50,26" fill="#ffd54f" />
+                    <polygon points="78,32 88,10 70,26" fill="#ffd54f" />
+                    <!-- Đầu rồng -->
+                    <ellipse cx="60" cy="58" rx="28" ry="30" fill="url(#dragonGrad)" stroke="#ffab00" stroke-width="2" />
+                    <!-- Mắt rồng -->
+                    <polygon points="43,50 54,55 44,58" fill="#ffea00" />
+                    <polygon points="77,50 66,55 76,58" fill="#ffea00" />
+                    <!-- Mũi và lửa -->
+                    <circle cx="52" cy="68" r="2.5" fill="#212121" />
+                    <circle cx="68" cy="68" r="2.5" fill="#212121" />
+                    <path d="M44,78 Q60,92 76,78 Q60,108 44,78 Z" fill="#ff3d00" />
+                    <polygon points="48,78 52,86 55,78" fill="#fff" />
+                    <polygon points="72,78 68,86 65,78" fill="#fff" />
+                </svg>
+            </div>
+            <div class="fighter-name">Rồng Già Cổ Đại</div>
+            <div class="hp-bar-bg">
+                <div class="hp-bar-fill dragon-hp-fill" id="dragonHpBar"></div>
+            </div>
+            <div class="hp-text" id="dragonHpText">HP: 600 / 600</div>
+            <div class="stats-badge">STR: 100 | AGI: 15 | INT: 80</div>
+            <div class="floating-text" id="dragonFloat"></div>
+        </div>
+
+        <!-- Hiệu ứng cầu phép và cầu lửa -->
+        <div class="projectile hero-orb" id="heroOrb"></div>
+        <div class="projectile dragon-fire" id="dragonFire"></div>
+    </div>
+
+    <div class="controls">
+        <button id="btnAttack" onclick="thucHienLuotDanh()">⚔️ Tấn Công (1 Lượt)</button>
+        <button id="btnAuto" onclick="batTatTuDong()">⚡ Tự Động Đấu</button>
+        <button id="btnReset" onclick="choiLai()">🔄 Chơi Lại</button>
+        <button id="btnSound" onclick="batTatAmThanh()">🔊 Âm thanh: BẬT</button>
+    </div>
+
+    <div class="log-panel">
+        <h3>📜 Lịch sử các đòn đánh và né đòn</h3>
+        <div id="battleLog"></div>
+    </div>
+
+    <script type="text/javascript" src="anhhung.js"></script>
+</body>
+
+</html>
