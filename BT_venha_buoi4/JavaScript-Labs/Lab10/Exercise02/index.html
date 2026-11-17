@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 10 - Exercise 02: Xử lý sự kiện bằng jQuery</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <div class="nav-group">
+        <a href="../index.html" class="nav-btn">← Về Lab 10</a>
+        <a href="../../index.html" class="nav-btn nav-btn--ghost">Trang chủ Portfolio</a>
+      </div>
+      <span class="ex-label">Lab 10 · Exercise 02</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro-card">
+      <h1>Xử lý sự kiện bằng jQuery (<code>.on()</code>, <code>.click()</code>, <code>.hover()</code>, <code>.keyup()</code>)</h1>
+      <p>Thanh tìm kiếm và bộ lọc danh mục sản phẩm tức thì kết hợp hiệu ứng phản hồi khi di chuột lên từng thẻ sản phẩm.</p>
+    </section>
+
+    <section class="panel">
+      <div class="filter-bar">
+        <input type="text" id="quickSearch" placeholder="Gõ tên sản phẩm cần tìm (keyup)...">
+        <div class="cat-pills">
+          <button type="button" class="cat-btn is-active" data-cat="all">Tất cả</button>
+          <button type="button" class="cat-btn" data-cat="nguyên liệu">Nguyên liệu</button>
+          <button type="button" class="cat-btn" data-cat="sữa & bơ">Sữa &amp; Bơ</button>
+          <button type="button" class="cat-btn" data-cat="dụng cụ">Dụng cụ</button>
+        </div>
+        <button type="button" id="resetFilterBtn" class="reset-btn">Đặt lại</button>
+      </div>
+
+      <div class="status-line">
+        <span id="resultCount">Đang hiển thị 6 sản phẩm</span>
+        <span id="hoverNotice" class="hover-notice">Di chuột lên một thẻ sản phẩm để xem gợi ý nhanh.</span>
+      </div>
+
+      <div id="productGrid" class="product-grid">
+        <article class="product-card" data-cat="nguyên liệu" data-name="Bột mì số 13 Baker's Choice">
+          <span class="badge">Nguyên liệu</span>
+          <h3>Bột mì số 13 Baker's Choice</h3>
+          <p>Hàm lượng protein 13%, thích hợp làm bánh mì hoa cúc, sandwich.</p>
+          <div class="card-foot">
+            <strong>32.000 đ</strong>
+            <button type="button" class="like-btn">♡ Yêu thích</button>
+          </div>
+        </article>
+
+        <article class="product-card" data-cat="sữa & bơ" data-name="Bơ lạt Anchor New Zealand">
+          <span class="badge">Sữa &amp; Bơ</span>
+          <h3>Bơ lạt Anchor New Zealand</h3>
+          <p>Bơ động vật nguyên chất 227g thơm béo cho bánh quy và bánh bông lan.</p>
+          <div class="card-foot">
+            <strong>78.000 đ</strong>
+            <button type="button" class="like-btn">♡ Yêu thích</button>
+          </div>
+        </article>
+
+        <article class="product-card" data-cat="dụng cụ" data-name="Khuôn tròn đế rời 20cm">
+          <span class="badge">Dụng cụ</span>
+          <h3>Khuôn tròn đế rời 20cm</h3>
+          <p>Hợp kim nhôm anod truyền nhiệt đều, dễ lấy bánh cheesecake, mousse.</p>
+          <div class="card-foot">
+            <strong>95.000 đ</strong>
+            <button type="button" class="like-btn">♡ Yêu thích</button>
+          </div>
+        </article>
+
+        <article class="product-card" data-cat="nguyên liệu" data-name="Chocolate đen 70% Puratos">
+          <span class="badge">Nguyên liệu</span>
+          <h3>Chocolate đen 70% Puratos</h3>
+          <p>Dạng nút dễ tan chảy, vị đắng nhẹ cân bằng cho brownie và ganache.</p>
+          <div class="card-foot">
+            <strong>115.000 đ</strong>
+            <button type="button" class="like-btn">♡ Yêu thích</button>
+          </div>
+        </article>
+
+        <article class="product-card" data-cat="sữa & bơ" data-name="Kem béo Whipping Cream Anchor">
+          <span class="badge">Sữa &amp; Bơ</span>
+          <h3>Kem béo Whipping Cream Anchor</h3>
+          <p>Hộp 1 lít độ béo 35.5%, dễ đánh bông trang trí mặt bánh kem.</p>
+          <div class="card-foot">
+            <strong>165.000 đ</strong>
+            <button type="button" class="like-btn">♡ Yêu thích</button>
+          </div>
+        </article>
+
+        <article class="product-card" data-cat="dụng cụ" data-name="Cân tiểu ly điện tử nhà bếp">
+          <span class="badge">Dụng cụ</span>
+          <h3>Cân tiểu ly điện tử nhà bếp</h3>
+          <p>Độ chính xác 0.1g, cân tối đa 3kg có màn hình LCD sáng rõ.</p>
+          <div class="card-foot">
+            <strong>140.000 đ</strong>
+            <button type="button" class="like-btn">♡ Yêu thích</button>
+          </div>
+        </article>
+      </div>
+
+      <p id="noResultMsg" class="no-result" hidden>Không tìm thấy sản phẩm phù hợp với điều kiện lọc hiện tại.</p>
+    </section>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

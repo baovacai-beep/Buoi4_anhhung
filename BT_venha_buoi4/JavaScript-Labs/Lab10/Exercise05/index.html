@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 10 - Exercise 05: $.get() &amp; jqXHR</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <div class="nav-group">
+        <a href="../index.html" class="nav-btn">← Về Lab 10</a>
+        <a href="../../index.html" class="nav-btn nav-btn--ghost">Trang chủ Portfolio</a>
+      </div>
+      <span class="ex-label">Lab 10 · Exercise 05</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro-card">
+      <h1>Yêu cầu AJAX <code>$.get()</code> &amp; Xử lý đối tượng <code>jqXHR</code></h1>
+      <p>Thực hiện HTTP GET tới API công khai (<code>https://jsonplaceholder.typicode.com/posts?_limit=6</code>) và theo dõi đầy đủ vòng đời callback của <code>jqXHR</code>: <code>.done()</code>, <code>.fail()</code> và <code>.always()</code>.</p>
+    </section>
+
+    <section class="panel">
+      <div class="controls-bar">
+        <div class="btn-group">
+          <button type="button" id="btnFetchSuccess" class="btn btn--primary">Tải dữ liệu API ($.get)</button>
+          <button type="button" id="btnFetchUsers" class="btn btn--secondary">Tải danh sách tác giả (Users)</button>
+          <button type="button" id="btnFetchError" class="btn btn--danger">Thử URL lỗi 404 (.fail)</button>
+        </div>
+        <span id="loadingIndicator" class="loading-pill" hidden>⏳ Đang gửi $.get()...</span>
+      </div>
+
+      <div id="jqxhrMeta" class="meta-box">
+        <strong>Trạng thái jqXHR:</strong> Chờ kích hoạt yêu cầu GET...
+      </div>
+
+      <div id="apiResultGrid" class="result-grid"></div>
+    </section>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 10 - Exercise 01: Cài đặt jQuery &amp; Selectors</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <div class="nav-group">
+        <a href="../index.html" class="nav-btn">← Về Lab 10</a>
+        <a href="../../index.html" class="nav-btn nav-btn--ghost">Trang chủ Portfolio</a>
+      </div>
+      <span class="ex-label">Lab 10 · Exercise 01</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro-card">
+      <h1>Cài đặt jQuery CDN &amp; Thực hành jQuery Selectors</h1>
+      <p>Nhúng jQuery 3.7.1 qua CDN HTTPS và thực hành chọn dòng chẵn/lẻ (<code>:even</code>/<code>:odd</code>), chọn theo thuộc tính dữ liệu (<code>[data-*]</code>) và làm nổi bật phần tử.</p>
+      <div id="jqStatus" class="status-pill">Đang kiểm tra jQuery...</div>
+    </section>
+
+    <section class="panel">
+      <h2>Bộ chọn jQuery Selectors tương tác</h2>
+      <div class="selector-bar">
+        <button type="button" class="sel-btn" data-mode="zebra">Tô màu xen kẽ (:even / :odd)</button>
+        <button type="button" class="sel-btn" data-mode="baking">Chọn [data-category="nguyen-lieu"]</button>
+        <button type="button" class="sel-btn" data-mode="lowstock">Chọn [data-stock="low"]</button>
+        <button type="button" class="sel-btn" data-mode="featured">Chọn [data-featured="true"]</button>
+        <button type="button" class="sel-btn sel-btn--reset" data-mode="reset">Xóa nổi bật</button>
+      </div>
+      <div id="selectorFeedback" class="feedback-box">Nhấn vào một nút bộ chọn phía trên để xem câu lệnh jQuery và số phần tử khớp.</div>
+
+      <div class="table-wrap">
+        <table id="inventoryTable">
+          <thead>
+            <tr>
+              <th>Mã SP</th>
+              <th>Tên sản phẩm</th>
+              <th>Danh mục</th>
+              <th>Đơn giá</th>
+              <th>Tồn kho</th>
+              <th>Nổi bật</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-category="nguyen-lieu" data-stock="ok" data-featured="true">
+              <td><code>BM101</code></td>
+              <td>Bột mì số 13 Baker's Choice</td>
+              <td>Nguyên liệu</td>
+              <td>32.000 đ</td>
+              <td>48 gói</td>
+              <td>★ Bán chạy</td>
+            </tr>
+            <tr data-category="sua-bo" data-stock="low" data-featured="true">
+              <td><code>BM102</code></td>
+              <td>Bơ lạt Anchor 227g</td>
+              <td>Sữa &amp; Bơ</td>
+              <td>78.000 đ</td>
+              <td>4 hộp (Sắp hết)</td>
+              <td>★ Bán chạy</td>
+            </tr>
+            <tr data-category="dung-cu" data-stock="ok" data-featured="false">
+              <td><code>BM103</code></td>
+              <td>Khuôn tròn đế rời 20cm</td>
+              <td>Dụng cụ</td>
+              <td>95.000 đ</td>
+              <td>26 cái</td>
+              <td>—</td>
+            </tr>
+            <tr data-category="nguyen-lieu" data-stock="low" data-featured="false">
+              <td><code>BM104</code></td>
+              <td>Bột cacao nguyên chất Malaysia</td>
+              <td>Nguyên liệu</td>
+              <td>110.000 đ</td>
+              <td>3 hộp (Sắp hết)</td>
+              <td>—</td>
+            </tr>
+            <tr data-category="sua-bo" data-stock="ok" data-featured="true">
+              <td><code>BM105</code></td>
+              <td>Whipping Cream Anchor 1L</td>
+              <td>Sữa &amp; Bơ</td>
+              <td>165.000 đ</td>
+              <td>19 hộp</td>
+              <td>★ Bán chạy</td>
+            </tr>
+            <tr data-category="dung-cu" data-stock="low" data-featured="false">
+              <td><code>BM106</code></td>
+              <td>Phới lồng inox cán dài</td>
+              <td>Dụng cụ</td>
+              <td>55.000 đ</td>
+              <td>2 cái (Sắp hết)</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

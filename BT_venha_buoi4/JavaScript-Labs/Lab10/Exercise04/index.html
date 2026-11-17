@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 10 - Exercise 04: Hiệu ứng &amp; Hoạt ảnh jQuery</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <div class="nav-group">
+        <a href="../index.html" class="nav-btn">← Về Lab 10</a>
+        <a href="../../index.html" class="nav-btn nav-btn--ghost">Trang chủ Portfolio</a>
+      </div>
+      <span class="ex-label">Lab 10 · Exercise 04</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro-card">
+      <h1>Hiệu ứng &amp; Hoạt ảnh bằng jQuery (<code>.fadeIn()</code>, <code>.fadeOut()</code>, <code>.slideToggle()</code>, <code>.animate()</code>)</h1>
+      <p>Ứng dụng các phương thức hiệu ứng của jQuery cho khối Câu hỏi thường gặp (FAQ Accordion), thẻ sản phẩm kèm cửa sổ xem nhanh và thanh hoạt ảnh tùy chỉnh.</p>
+    </section>
+
+    <div class="grid-2">
+      <!-- FAQ Accordion (.slideToggle) -->
+      <section class="panel">
+        <div class="panel-head">
+          <h2>1. Câu hỏi thường gặp (<code>.slideToggle()</code>)</h2>
+          <div class="btn-row">
+            <button type="button" id="expandAllFaq" class="btn btn--outline">Mở tất cả</button>
+            <button type="button" id="collapseAllFaq" class="btn btn--outline">Thu gọn</button>
+          </div>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <button type="button" class="faq-q">1. Thời gian giao hàng nguyên liệu làm bánh là bao lâu? <span>+</span></button>
+            <div class="faq-a">
+              <p>Đơn hàng nội thành TP.HCM được giao hỏa tốc trong 2–4 giờ; các tỉnh thành khác nhận hàng từ 2–3 ngày làm việc qua đối tác vận chuyển lạnh.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-q">2. Bơ và Whipping Cream được bảo quản như thế nào khi giao? <span>+</span></button>
+            <div class="faq-a">
+              <p>Các sản phẩm sữa và bơ luôn được đóng gói trong túi giữ nhiệt kèm đá gel để đảm bảo nhiệt độ ổn định từ 2°C đến 6°C suốt quá trình vận chuyển.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-q">3. Sinh viên UEH có mã giảm giá riêng không? <span>+</span></button>
+            <div class="faq-a">
+              <p>Sinh viên có thể nhập mã <strong>UEH50K</strong> ở bước thanh toán để được giảm trực tiếp 50.000đ cho mọi đơn hàng từ 500.000đ trở lên.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FadeIn / FadeOut + Animate -->
+      <section class="panel">
+        <h2>2. Thẻ sản phẩm động &amp; Hoạt ảnh (<code>.fadeIn()</code>, <code>.fadeOut()</code>, <code>.animate()</code>)</h2>
+
+        <div class="promo-stage">
+          <div id="promoBox" class="promo-box">
+            <strong>🎁 Ưu đãi Flash Sale</strong>
+            <p>Miễn phí vận chuyển cho đơn từ 300.000đ hôm nay.</p>
+          </div>
+        </div>
+
+        <div class="btn-row margin-bottom">
+          <button type="button" id="btnFadeOut" class="btn btn--outline">Ẩn thẻ (.fadeOut)</button>
+          <button type="button" id="btnFadeIn" class="btn btn--primary">Hiện thẻ (.fadeIn)</button>
+          <button type="button" id="btnAnimateGrow" class="btn btn--secondary">Chạy hoạt ảnh (.animate)</button>
+          <button type="button" id="btnAnimateReset" class="btn btn--outline">Khôi phục</button>
+        </div>
+
+        <div class="mini-cards">
+          <div class="mini-card">
+            <h3>Combo Bông Lan Trứng Muối</h3>
+            <p>Giá ưu đãi: <strong>189.000 đ</strong></p>
+            <button type="button" class="btn btn--primary quick-view-btn" data-title="Combo Bông Lan Trứng Muối" data-detail="Gồm bột trộn sẵn 500g, chà bông gà, sốt dầu trứng và 10 trứng muối đóng gói hút chân không.">Xem nhanh (.fadeIn)</button>
+          </div>
+          <div class="mini-card">
+            <h3>Combo Tiramisu Ý Chuẩn Vị</h3>
+            <p>Giá ưu đãi: <strong>235.000 đ</strong></p>
+            <button type="button" class="btn btn--primary quick-view-btn" data-title="Combo Tiramisu Ý Chuẩn Vị" data-detail="Bao gồm bánh Ladyfinger Savoiardi, phô mai Mascarpone 250g, bột cacao nguyên chất và cà phê Espresso.">Xem nhanh (.fadeIn)</button>
+          </div>
+        </div>
+
+        <div id="quickToast" class="quick-toast" style="display: none;">
+          <div class="toast-head">
+            <strong id="toastTitle">Chi tiết sản phẩm</strong>
+            <button type="button" id="closeToastBtn" class="close-x">✕</button>
+          </div>
+          <p id="toastBody"></p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

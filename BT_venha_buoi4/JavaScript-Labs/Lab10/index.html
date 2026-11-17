@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 10 — JavaScript 3: jQuery | Hồ Gia Bảo</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .lab-hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: #fff;
+      padding: 36px 0;
+    }
+    .breadcrumb {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      font-size: 14px;
+      margin-bottom: 14px;
+      color: #cbd5e1;
+    }
+    .breadcrumb a {
+      color: #93c5fd;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    .lab-hero h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+    .lab-hero p {
+      color: #dbeafe;
+      max-width: 760px;
+      font-size: 15px;
+    }
+    .ex-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      margin: 32px 0;
+    }
+    .ex-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .ex-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
+    }
+    .ex-card__badge {
+      display: inline-block;
+      align-self: flex-start;
+      background: var(--accent-bg);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+    .ex-card h2 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+    .ex-card p {
+      font-size: 14.5px;
+      color: var(--muted);
+      flex-grow: 1;
+      margin-bottom: 18px;
+    }
+    .lab-nav-footer {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .btn--outline {
+      background: var(--surface);
+      color: var(--primary);
+      border: 1px solid var(--border);
+    }
+    .btn--outline:hover {
+      background: var(--accent-bg);
+    }
+    @media (max-width: 760px) {
+      .ex-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="lab-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">← Trang chủ Portfolio</a>
+        <span>/</span>
+        <span>Lab 10 — JavaScript 3: jQuery</span>
+      </nav>
+      <h1>Lab 10 — JavaScript 3: jQuery</h1>
+      <p>Ứng dụng thư viện jQuery 3.7.1 (CDN HTTPS): bộ chọn Selectors, gán sự kiện ngắn gọn, thao tác DOM trong giỏ hàng mini, hiệu ứng Animation và gọi GET Request qua jqXHR.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="ex-grid" aria-label="Danh sách Exercise Lab 10">
+      <article class="ex-card">
+        <span class="ex-card__badge">Exercise 01</span>
+        <h2>Cài đặt jQuery &amp; Selectors</h2>
+        <p>Tích hợp jQuery CDN HTTPS và thực hành chọn dòng chẵn/lẻ (<code>:even</code>/<code>:odd</code>), lọc theo thuộc tính <code>[data-*]</code> và làm nổi bật phần tử.</p>
+        <a href="Exercise01/index.html" class="btn btn--primary">Chạy Exercise 01 →</a>
+      </article>
+
+      <article class="ex-card">
+        <span class="ex-card__badge">Exercise 02</span>
+        <h2>Xử lý sự kiện bằng jQuery</h2>
+        <p>Sử dụng <code>.on()</code>, <code>.click()</code>, <code>.hover()</code> và <code>.keyup()</code> để xây dựng thanh tìm kiếm và bộ lọc danh sách sản phẩm tức thì.</p>
+        <a href="Exercise02/index.html" class="btn btn--primary">Chạy Exercise 02 →</a>
+      </article>
+
+      <article class="ex-card">
+        <span class="ex-card__badge">Exercise 03</span>
+        <h2>Thao tác DOM với jQuery</h2>
+        <p>Xây dựng Mini Giỏ hàng tương tác sử dụng <code>.append()</code>, <code>.prepend()</code>, <code>.addClass()</code>, <code>.toggleClass()</code> và <code>.remove()</code>.</p>
+        <a href="Exercise03/index.html" class="btn btn--primary">Chạy Exercise 03 →</a>
+      </article>
+
+      <article class="ex-card">
+        <span class="ex-card__badge">Exercise 04</span>
+        <h2>Hiệu ứng &amp; Hoạt ảnh jQuery</h2>
+        <p>Thực hành <code>.fadeIn()</code>, <code>.fadeOut()</code>, <code>.slideToggle()</code> và <code>.animate()</code> qua khối Câu hỏi thường gặp (FAQ Accordion) và thẻ sản phẩm động.</p>
+        <a href="Exercise04/index.html" class="btn btn--primary">Chạy Exercise 04 →</a>
+      </article>
+
+      <article class="ex-card">
+        <span class="ex-card__badge">Exercise 05</span>
+        <h2>GET Request &amp; jqXHR</h2>
+        <p>Thực hiện yêu cầu bất đồng bộ <code>$.get()</code> tới API công khai và xử lý kết quả qua đối tượng <code>jqXHR</code> (<code>.done()</code>, <code>.fail()</code>, <code>.always()</code>).</p>
+        <a href="Exercise05/index.html" class="btn btn--primary">Chạy Exercise 05 →</a>
+      </article>
+    </section>
+
+    <div class="lab-nav-footer">
+      <a href="../Lab09/index.html" class="btn btn--outline">← Quay lại Lab 09</a>
+      <a href="../index.html" class="btn btn--primary">Về Trang chủ Portfolio</a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Hồ Gia Bảo (31241023360) · Lab 10 — JavaScript 3: jQuery</p>
+    </div>
+  </footer>
+</body>
+</html>

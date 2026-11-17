@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 10 - Exercise 03: Thao tác DOM với jQuery (Mini Giỏ hàng)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <div class="nav-group">
+        <a href="../index.html" class="nav-btn">← Về Lab 10</a>
+        <a href="../../index.html" class="nav-btn nav-btn--ghost">Trang chủ Portfolio</a>
+      </div>
+      <span class="ex-label">Lab 10 · Exercise 03</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro-card">
+      <h1>Mini Giỏ hàng tương tác bằng jQuery (<code>.append()</code>, <code>.prepend()</code>, <code>.addClass()</code>, <code>.toggleClass()</code>, <code>.remove()</code>)</h1>
+      <p>Thêm sản phẩm vào giỏ hàng, chuyển đổi chế độ hiển thị thu gọn, đánh dấu ưu tiên bằng CSS class động và xóa sản phẩm khỏi DOM.</p>
+    </section>
+
+    <div class="cart-layout">
+      <!-- Catalog -->
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Danh sách sản phẩm</h2>
+          <label class="mode-switch">
+            <input type="checkbox" id="prependMode">
+            <span>Thêm lên đầu giỏ (<code>.prepend()</code>)</span>
+          </label>
+        </div>
+        <div id="catalogList" class="catalog-grid">
+          <div class="prod-box" data-id="C01" data-name="Bột mì số 13 Baker's Choice" data-price="32000">
+            <h3>Bột mì số 13 Baker's Choice</h3>
+            <p class="price">32.000 đ</p>
+            <button type="button" class="btn btn--primary add-cart-btn">+ Thêm vào giỏ</button>
+          </div>
+          <div class="prod-box" data-id="C02" data-name="Bơ lạt Anchor 227g" data-price="78000">
+            <h3>Bơ lạt Anchor 227g</h3>
+            <p class="price">78.000 đ</p>
+            <button type="button" class="btn btn--primary add-cart-btn">+ Thêm vào giỏ</button>
+          </div>
+          <div class="prod-box" data-id="C03" data-name="Chocolate đen 70% Puratos" data-price="115000">
+            <h3>Chocolate đen 70% Puratos</h3>
+            <p class="price">115.000 đ</p>
+            <button type="button" class="btn btn--primary add-cart-btn">+ Thêm vào giỏ</button>
+          </div>
+          <div class="prod-box" data-id="C04" data-name="Khuôn tròn đế rời 20cm" data-price="95000">
+            <h3>Khuôn tròn đế rời 20cm</h3>
+            <p class="price">95.000 đ</p>
+            <button type="button" class="btn btn--primary add-cart-btn">+ Thêm vào giỏ</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mini Cart -->
+      <section class="panel" id="cartPanel">
+        <div class="panel-head">
+          <h2>Giỏ hàng (<span id="cartCount">0</span>)</h2>
+          <div class="cart-tools">
+            <button type="button" id="toggleCompactBtn" class="btn btn--outline">Thu gọn (.toggleClass)</button>
+            <button type="button" id="clearCartBtn" class="btn btn--danger">Xóa hết</button>
+          </div>
+        </div>
+
+        <ul id="cartList" class="cart-list"></ul>
+        <p id="cartEmpty" class="cart-empty">Giỏ hàng đang trống. Hãy chọn sản phẩm bên trái!</p>
+
+        <div class="cart-footer">
+          <div class="total-row">
+            <span>Tổng thanh toán:</span>
+            <strong id="cartTotal">0 đ</strong>
+          </div>
+          <div id="domActionNote" class="action-note">Thao tác DOM jQuery sẽ hiển thị tại đây.</div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
