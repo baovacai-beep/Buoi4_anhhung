@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 09 - Exercise 02: Thêm &amp; Xóa node HTML động</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <div class="nav-group">
+        <a href="../index.html" class="nav-btn">← Về Lab 09</a>
+        <a href="../../index.html" class="nav-btn nav-btn--ghost">Trang chủ Portfolio</a>
+      </div>
+      <span class="ex-label">Lab 09 · Exercise 02</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro-card">
+      <h1>Danh sách nguyên liệu cần mua (<code>createElement</code>, <code>appendChild</code>, <code>remove</code>)</h1>
+      <p>Thực hành tạo mới, chèn vào cây DOM, đánh dấu hoàn thành và xóa bỏ các phần tử HTML động một cách an toàn.</p>
+    </section>
+
+    <section class="panel">
+      <form id="shoppingForm" class="add-form">
+        <input type="text" id="itemNameInput" placeholder="Tên nguyên liệu (VD: Kem tươi Whipping)..." required>
+        <input type="text" id="itemQtyInput" placeholder="Số lượng (VD: 500ml)" value="1 gói">
+        <select id="itemCategoryInput">
+          <option value="Nguyên liệu khô">Nguyên liệu khô</option>
+          <option value="Sữa & Bơ">Sữa &amp; Bơ</option>
+          <option value="Dụng cụ">Dụng cụ</option>
+        </select>
+        <button type="submit" class="btn btn--primary">+ Thêm nguyên liệu</button>
+      </form>
+
+      <div class="list-toolbar">
+        <div class="stats" id="listStats">Tổng: 0 mục · Đã mua: 0</div>
+        <div class="filter-group">
+          <button type="button" class="filter-btn is-active" data-filter="all">Tất cả</button>
+          <button type="button" class="filter-btn" data-filter="pending">Chưa mua</button>
+          <button type="button" class="filter-btn" data-filter="done">Đã mua</button>
+          <button type="button" id="clearDoneBtn" class="btn btn--danger-outline">Xóa mục đã mua</button>
+        </div>
+      </div>
+
+      <ul id="shoppingList" class="shopping-list" aria-live="polite"></ul>
+      <p id="emptyState" class="empty-state" hidden>Danh sách đang trống. Hãy thêm nguyên liệu mới ở phía trên!</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

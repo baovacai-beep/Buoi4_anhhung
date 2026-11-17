@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 09 — JavaScript 2: DOM and Events | Hồ Gia Bảo</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .lab-hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: #fff;
+      padding: 36px 0;
+    }
+    .breadcrumb {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      font-size: 14px;
+      margin-bottom: 14px;
+      color: #cbd5e1;
+    }
+    .breadcrumb a {
+      color: #93c5fd;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    .lab-hero h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+    .lab-hero p {
+      color: #dbeafe;
+      max-width: 760px;
+      font-size: 15px;
+    }
+    .ex-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      margin: 32px 0;
+    }
+    .ex-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .ex-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
+    }
+    .ex-card__badge {
+      display: inline-block;
+      align-self: flex-start;
+      background: var(--accent-bg);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+    .ex-card h2 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+    .ex-card p {
+      font-size: 14.5px;
+      color: var(--muted);
+      flex-grow: 1;
+      margin-bottom: 18px;
+    }
+    .lab-nav-footer {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .btn--outline {
+      background: var(--surface);
+      color: var(--primary);
+      border: 1px solid var(--border);
+    }
+    .btn--outline:hover {
+      background: var(--accent-bg);
+    }
+    @media (max-width: 760px) {
+      .ex-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="lab-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">← Trang chủ Portfolio</a>
+        <span>/</span>
+        <span>Lab 09 — JavaScript 2: DOM and Events</span>
+      </nav>
+      <h1>Lab 09 — JavaScript 2: DOM and Events</h1>
+      <p>Thực hành truy xuất và cập nhật cây tài liệu DOM, thêm/xóa node HTML động, lắng nghe sự kiện tương tác người dùng và kiểm tra dữ liệu Form thời gian thực.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="ex-grid" aria-label="Danh sách Exercise Lab 09">
+      <article class="ex-card">
+        <span class="ex-card__badge">Exercise 01</span>
+        <h2>Truy xuất DOM &amp; Theme Switcher</h2>
+        <p>Sử dụng <code>querySelector</code> và <code>querySelectorAll</code> để thay đổi nội dung văn bản, thuộc tính hình ảnh sản phẩm và chuyển đổi chế độ giao diện Sáng/Tối.</p>
+        <a href="Exercise01/index.html" class="btn btn--primary">Chạy Exercise 01 →</a>
+      </article>
+
+      <article class="ex-card">
+        <span class="ex-card__badge">Exercise 02</span>
+        <h2>Thêm &amp; Xóa node HTML động</h2>
+        <p>Ứng dụng Danh sách nguyên liệu cần mua thực hành tạo, gắn và xóa phần tử bằng <code>createElement</code>, <code>appendChild</code> và <code>remove</code>.</p>
+        <a href="Exercise02/index.html" class="btn btn--primary">Chạy Exercise 02 →</a>
+      </article>
+
+      <article class="ex-card">
+        <span class="ex-card__badge">Exercise 03</span>
+        <h2>Xử lý sự kiện người dùng</h2>
+        <p>Lắng nghe các sự kiện <code>click</code>, <code>mouseover</code>, <code>mouseout</code> và <code>keyup</code> qua thư viện xem trước ảnh sản phẩm và bộ đếm số lượng đặt mua.</p>
+        <a href="Exercise03/index.html" class="btn btn--primary">Chạy Exercise 03 →</a>
+      </article>
+
+      <article class="ex-card">
+        <span class="ex-card__badge">Exercise 04</span>
+        <h2>Form &amp; Validation thời gian thực</h2>
+        <p>Kiểm tra hợp lệ Họ tên, Email, SĐT Việt Nam 10 số và Mật khẩu ≥ 8 ký tự theo thời gian thực với phản hồi lỗi/thành công rõ ràng.</p>
+        <a href="Exercise04/index.html" class="btn btn--primary">Chạy Exercise 04 →</a>
+      </article>
+    </section>
+
+    <div class="lab-nav-footer">
+      <a href="../Lab08/index.html" class="btn btn--outline">← Quay lại Lab 08</a>
+      <a href="../Lab10/index.html" class="btn btn--primary">Chuyển sang Lab 10 →</a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Hồ Gia Bảo (31241023360) · Lab 09 — JavaScript 2: DOM and Events</p>
+    </div>
+  </footer>
+</body>
+</html>

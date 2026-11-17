@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 09 - Exercise 01: Truy xuất DOM &amp; Theme Switcher</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <div class="nav-group">
+        <a href="../index.html" class="nav-btn">← Về Lab 09</a>
+        <a href="../../index.html" class="nav-btn nav-btn--ghost">Trang chủ Portfolio</a>
+      </div>
+      <div class="topbar__actions">
+        <span class="ex-label">Lab 09 · Exercise 01</span>
+        <button type="button" id="themeSwitchBtn" class="theme-switch">🌙 Chuyển giao diện Tối</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro-card">
+      <h1>Truy xuất DOM (<code>querySelector</code>, <code>querySelectorAll</code>) &amp; Theme Switcher</h1>
+      <p>Thay đổi nội dung văn bản, thuộc tính <code>src</code>/<code>alt</code> của thẻ <code>&lt;img&gt;</code>, cập nhật hàng loạt thẻ thông số bằng <code>querySelectorAll</code> và chuyển đổi giao diện Sáng/Tối.</p>
+    </section>
+
+    <div class="grid-2">
+      <!-- Product Card controlled via DOM -->
+      <section class="panel product-showcase">
+        <div class="product-media">
+          <img id="productImg" src="" alt="Sản phẩm nổi bật">
+          <span id="productBadge" class="badge">Bán chạy</span>
+        </div>
+        <h2 id="productTitle">Combo Làm Bánh Bông Lan Cơ Bản</h2>
+        <p id="productDesc">Bao gồm bột mì mịn số 8, bơ lạt nhập khẩu và khuôn tròn chống dính 18cm cho người mới bắt đầu.</p>
+        <div class="spec-row">
+          <span class="spec-chip">Trọng lượng: 1.5 kg</span>
+          <span class="spec-chip">Xuất xứ: Pháp / VN</span>
+          <span class="spec-chip">Bảo hành: Đổi trả 7 ngày</span>
+        </div>
+        <div class="price-line">
+          <span>Giá niêm yết:</span>
+          <strong id="productPrice">249.000 đ</strong>
+        </div>
+      </section>
+
+      <!-- DOM Controls -->
+      <section class="panel">
+        <h2>Bảng điều khiển thao tác DOM</h2>
+        <div class="control-block">
+          <h3>1. Chọn mẫu sản phẩm (cập nhật text + thuộc tính <code>src</code>/<code>alt</code>)</h3>
+          <div class="btn-group">
+            <button type="button" class="btn btn--primary variant-btn" data-variant="cake">Combo Bông Lan</button>
+            <button type="button" class="btn btn--outline variant-btn" data-variant="tart">Combo Tart Trứng</button>
+            <button type="button" class="btn btn--outline variant-btn" data-variant="cookie">Combo Cookie Bơ</button>
+          </div>
+        </div>
+
+        <div class="control-block">
+          <h3>2. Cập nhật tiêu đề &amp; nhãn trực tiếp</h3>
+          <div class="inline-form">
+            <input type="text" id="customTitleInput" placeholder="Nhập tiêu đề sản phẩm mới...">
+            <button type="button" id="applyTitleBtn" class="btn btn--primary">Đổi tiêu đề</button>
+          </div>
+        </div>
+
+        <div class="control-block">
+          <h3>3. Thao tác hàng loạt với <code>querySelectorAll('.spec-chip')</code></h3>
+          <div class="btn-group">
+            <button type="button" id="highlightChipsBtn" class="btn btn--secondary">Làm nổi bật tất cả thông số</button>
+            <button type="button" id="resetChipsBtn" class="btn btn--outline">Khôi phục mặc định</button>
+          </div>
+        </div>
+
+        <div id="domLog" class="dom-log">Trạng thái DOM: Sẵn sàng tương tác.</div>
+      </section>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

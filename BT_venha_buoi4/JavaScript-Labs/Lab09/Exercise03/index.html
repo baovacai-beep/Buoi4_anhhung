@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 09 - Exercise 03: Xử lý sự kiện người dùng</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <div class="nav-group">
+        <a href="../index.html" class="nav-btn">← Về Lab 09</a>
+        <a href="../../index.html" class="nav-btn nav-btn--ghost">Trang chủ Portfolio</a>
+      </div>
+      <span class="ex-label">Lab 09 · Exercise 03</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro-card">
+      <h1>Xử lý sự kiện người dùng (<code>click</code>, <code>mouseover</code>, <code>mouseout</code>, <code>keyup</code>)</h1>
+      <p>Di chuột qua các ảnh nhỏ (<code>mouseover</code>/<code>mouseout</code>) để xem trước nhanh, nhấn (<code>click</code>) để khóa góc chụp và nhập số lượng/ghi chú (<code>keyup</code>) để tính tiền tự động.</p>
+    </section>
+
+    <div class="grid-2">
+      <!-- Image Gallery Preview -->
+      <section class="panel">
+        <h2>Thư viện ảnh sản phẩm</h2>
+        <div class="main-preview">
+          <img id="mainGalleryImg" src="" alt="Ảnh xem trước sản phẩm">
+          <div id="previewCaption" class="preview-caption"></div>
+        </div>
+        <div id="thumbRow" class="thumb-row" role="list"></div>
+        <p id="hoverStatus" class="hint">Di chuột lên ảnh thu nhỏ để xem trước tạm thời; nhấn để chọn cố định.</p>
+      </section>
+
+      <!-- Quantity Counter + Keyup Note + Event Log -->
+      <section class="panel">
+        <h2>Bộ đếm số lượng &amp; Nhật ký sự kiện</h2>
+        <div class="product-summary">
+          <h3>Máy Đánh Trứng Cầm Tay 7 Tốc Độ</h3>
+          <div class="unit-price">Đơn giá: <strong id="unitPriceLabel">320.000 đ</strong></div>
+
+          <div class="qty-row">
+            <label for="qtyInput">Số lượng đặt mua:</label>
+            <div class="qty-control">
+              <button type="button" id="btnMinus" class="qty-btn" aria-label="Giảm số lượng">−</button>
+              <input type="text" id="qtyInput" value="1" inputmode="numeric" aria-label="Số lượng">
+              <button type="button" id="btnPlus" class="qty-btn" aria-label="Tăng số lượng">+</button>
+            </div>
+          </div>
+
+          <div class="total-box">
+            <span>Tạm tính:</span>
+            <strong id="totalPriceLabel">320.000 đ</strong>
+          </div>
+
+          <div class="note-box">
+            <label for="orderNote">Ghi chú đơn hàng (<code>keyup</code> đếm ký tự):</label>
+            <input type="text" id="orderNote" maxlength="80" placeholder="VD: Giao giờ hành chính, bọc chống sốc...">
+            <small id="noteCount">0 / 80 ký tự</small>
+          </div>
+        </div>
+
+        <div class="log-head">
+          <h3>Nhật ký sự kiện (Live Event Log)</h3>
+          <button type="button" id="clearEventLog" class="clear-btn">Xóa log</button>
+        </div>
+        <ul id="eventLogList" class="event-log" aria-live="polite"></ul>
+      </section>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
