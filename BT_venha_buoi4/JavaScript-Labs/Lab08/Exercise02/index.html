@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 08 - Exercise 02: Biến, Toán tử &amp; Cấu trúc điều khiển</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <div class="nav-group">
+        <a href="../index.html" class="nav-btn">← Về Lab 08</a>
+        <a href="../../index.html" class="nav-btn nav-btn--ghost">Trang chủ Portfolio</a>
+      </div>
+      <span class="ex-label">Lab 08 · Exercise 02</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro-card">
+      <h1>Biến, Toán tử &amp; Cấu trúc điều khiển (<code>if/else</code>, <code>switch</code>, <code>for</code>, <code>while</code>)</h1>
+      <p>Bài toán tính chiết khấu đơn hàng, phí vận chuyển và xếp hạng thành viên thương mại điện tử theo từng bậc ưu đãi.</p>
+    </section>
+
+    <div class="grid-2">
+      <section class="panel">
+        <h2>Thông tin đơn hàng &amp; Thành viên</h2>
+        <form id="discountForm" class="form-grid">
+          <div class="field">
+            <label for="orderSubtotal">Tổng tiền hàng (VNĐ)</label>
+            <input type="number" id="orderSubtotal" min="50000" step="10000" value="850000" required>
+          </div>
+
+          <div class="field">
+            <label for="memberTier">Hạng thành viên (<code>switch</code>)</label>
+            <select id="memberTier">
+              <option value="bronze">Đồng (Bronze) — Giảm 2%</option>
+              <option value="silver">Bạc (Silver) — Giảm 5%</option>
+              <option value="gold" selected>Vàng (Gold) — Giảm 10%</option>
+              <option value="diamond">Kim cương (Diamond) — Giảm 15%</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="couponCode">Mã khuyến mãi (<code>if/else</code>)</label>
+            <select id="couponCode">
+              <option value="NONE">Không dùng mã</option>
+              <option value="FREESHIP">FREESHIP (Miễn phí giao hàng)</option>
+              <option value="UEH50K">UEH50K (Giảm thêm 50.000đ cho đơn từ 500k)</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="installmentMonths">Số kỳ chia thanh toán thử (<code>for</code>)</label>
+            <input type="number" id="installmentMonths" min="1" max="12" value="3">
+          </div>
+
+          <button type="submit" class="btn btn--primary">Tính chiết khấu &amp; Lập bảng</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2>Kết quả chi tiết đơn hàng</h2>
+        <div id="summaryBox" class="summary-box"></div>
+        <div id="tierProgressBox" class="tier-progress"></div>
+      </section>
+    </div>
+
+    <section class="panel">
+      <h2>Bảng phân kỳ thanh toán dự kiến (sinh bằng vòng lặp <code>for</code>)</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Kỳ thanh toán</th>
+              <th>Số tiền mỗi kỳ</th>
+              <th>Dư nợ còn lại sau kỳ</th>
+            </tr>
+          </thead>
+          <tbody id="scheduleBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

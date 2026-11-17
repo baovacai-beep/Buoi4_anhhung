@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 08 - Exercise 03: Làm việc với String &amp; Date</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <div class="nav-group">
+        <a href="../index.html" class="nav-btn">← Về Lab 08</a>
+        <a href="../../index.html" class="nav-btn nav-btn--ghost">Trang chủ Portfolio</a>
+      </div>
+      <span class="ex-label">Lab 08 · Exercise 03</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro-card">
+      <h1>Làm việc với String &amp; Date trong JavaScript</h1>
+      <p>Thực hành xử lý chuỗi (chuẩn hóa họ tên, tạo SEO URL Slug, tìm kiếm tiếng Việt không dấu) kết hợp đối tượng <code>Date</code> (đồng hồ thời gian thực &amp; bộ đếm ngược Flash Sale).</p>
+    </section>
+
+    <div class="grid-2">
+      <!-- Date: Real-time Clock & Flash Sale -->
+      <section class="panel">
+        <h2>1. Đối tượng <code>Date</code> — Đồng hồ &amp; Đếm ngược Flash Sale</h2>
+        <div class="clock-card">
+          <div class="clock-label">Thời gian hệ thống hiện tại</div>
+          <div id="liveTime" class="clock-time">--:--:--</div>
+          <div id="liveDate" class="clock-date">Đang tải...</div>
+        </div>
+
+        <div class="flash-card">
+          <div class="flash-head">
+            <span class="flash-badge">⚡ FLASH SALE KẾT THÚC SAU</span>
+            <div class="preset-group">
+              <button type="button" class="preset-btn" data-minutes="15">+15 phút</button>
+              <button type="button" class="preset-btn is-active" data-minutes="120">+2 giờ</button>
+              <button type="button" class="preset-btn" data-minutes="1440">+24 giờ</button>
+            </div>
+          </div>
+          <div class="countdown-grid">
+            <div class="cd-box"><span id="cdDays">00</span><small>Ngày</small></div>
+            <div class="cd-box"><span id="cdHours">00</span><small>Giờ</small></div>
+            <div class="cd-box"><span id="cdMinutes">00</span><small>Phút</small></div>
+            <div class="cd-box"><span id="cdSeconds">00</span><small>Giây</small></div>
+          </div>
+          <p id="flashTargetInfo" class="hint"></p>
+        </div>
+      </section>
+
+      <!-- String: Name normalizer & Slug generator -->
+      <section class="panel">
+        <h2>2. Đối tượng <code>String</code> — Chuẩn hóa họ tên &amp; Tạo Slug URL</h2>
+        <div class="field">
+          <label for="rawNameInput">Nhập chuỗi họ tên hoặc tiêu đề sản phẩm thô:</label>
+          <input type="text" id="rawNameInput" value="   hồ   giA   bẢo  -  bánh   Mì   sữa  tươi  ">
+        </div>
+        <div class="result-stack">
+          <div class="result-item">
+            <span class="result-label">Chuỗi chuẩn hóa (Title Case):</span>
+            <strong id="normalizedName"></strong>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Đường dẫn URL Slug chuẩn SEO:</span>
+            <code id="generatedSlug"></code>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Thống kê ký tự:</span>
+            <span id="stringStats"></span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Accent-insensitive search -->
+    <section class="panel">
+      <h2>3. Tìm kiếm từ khóa tiếng Việt không dấu (Accent-insensitive Search)</h2>
+      <div class="field">
+        <label for="keywordInput">Nhập từ khóa (ví dụ: <code>banh mi</code>, <code>bo lat</code>, <code>socola</code>, <code>pho mai</code>):</label>
+        <input type="text" id="keywordInput" placeholder="Gõ không dấu hoặc có dấu để lọc sản phẩm...">
+      </div>
+      <div id="searchMeta" class="hint"></div>
+      <ul id="searchResultList" class="search-list"></ul>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

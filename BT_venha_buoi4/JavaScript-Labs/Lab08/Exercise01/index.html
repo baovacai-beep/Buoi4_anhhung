@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 08 - Exercise 01: Nhúng JS &amp; Browser Console</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <div class="nav-group">
+        <a href="../index.html" class="nav-btn">← Về Lab 08</a>
+        <a href="../../index.html" class="nav-btn nav-btn--ghost">Trang chủ Portfolio</a>
+      </div>
+      <span class="ex-label">Lab 08 · Exercise 01</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro-card">
+      <h1>Nhúng JavaScript (Internal &amp; External) &amp; Browser Console</h1>
+      <p>Minh họa cách nhúng mã JavaScript trực tiếp trong HTML (Internal) và tách tệp riêng (External <code>script.js</code>), xuất dữ liệu ra giao diện và kiểm tra biến/bảng dữ liệu bằng <code>console.log()</code>, <code>console.table()</code>.</p>
+    </section>
+
+    <div class="grid-2">
+      <!-- Internal JS Output -->
+      <section class="panel">
+        <div class="panel__head">
+          <h2>1. Kết quả từ Internal JavaScript</h2>
+          <span class="tag tag--blue">&lt;script&gt; nội tuyến</span>
+        </div>
+        <div id="internalOutput" class="output-box"></div>
+        <p class="hint">Đoạn Internal Script ngay bên dưới trang đã khởi tạo thông tin sinh viên và thời điểm tải trang.</p>
+      </section>
+
+      <!-- External JS Output -->
+      <section class="panel">
+        <div class="panel__head">
+          <h2>2. Kết quả từ External JavaScript</h2>
+          <span class="tag tag--green">script.js</span>
+        </div>
+        <div id="externalOutput" class="output-box"></div>
+        <div class="btn-row">
+          <button type="button" id="btnLogConsole" class="btn btn--primary">Ghi log biến &amp; typeof</button>
+          <button type="button" id="btnTableConsole" class="btn btn--secondary">Xuất console.table()</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- On-page Console Mirror + Product Table -->
+    <section class="panel">
+      <div class="panel__head">
+        <h2>3. Dữ liệu sản phẩm &amp; Nhật ký Browser Console</h2>
+        <button type="button" id="btnClearLog" class="btn btn--outline">Xóa nhật ký hiển thị</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Mã SP</th>
+              <th>Tên sản phẩm</th>
+              <th>Danh mục</th>
+              <th>Đơn giá (VNĐ)</th>
+              <th>Tồn kho</th>
+            </tr>
+          </thead>
+          <tbody id="productTableBody"></tbody>
+        </table>
+      </div>
+      <h3 class="sub-heading">Mô phỏng Console Output (Mở F12 → Console để đối chiếu trực tiếp)</h3>
+      <pre id="consoleMirror" class="console-box" aria-live="polite"></pre>
+    </section>
+  </main>
+
+  <!-- INTERNAL JAVASCRIPT -->
+  <script>
+    const internalStudent = {
+      fullName: "Hồ Gia Bảo",
+      studentId: "31241023360",
+      course: "Phát triển ứng dụng TMĐT (UEH)",
+      loadedAt: new Date().toLocaleString("vi-VN")
+    };
+
+    const internalBox = document.getElementById("internalOutput");
+    internalBox.innerHTML = `
+      <ul class="info-list">
+        <li><strong>Sinh viên:</strong> ${internalStudent.fullName} (${internalStudent.studentId})</li>
+        <li><strong>Học phần:</strong> ${internalStudent.course}</li>
+        <li><strong>Trạng thái Internal JS:</strong> <span class="ok">Đã thực thi thành công</span></li>
+        <li><strong>Thời điểm nạp trang:</strong> ${internalStudent.loadedAt}</li>
+      </ul>
+    `;
+
+    console.info("[Internal JS] Đã khởi tạo thông tin sinh viên:", internalStudent);
+  </script>
+
+  <!-- EXTERNAL JAVASCRIPT -->
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 08 - Exercise 04: Array, Object &amp; Function</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <div class="nav-group">
+        <a href="../index.html" class="nav-btn">← Về Lab 08</a>
+        <a href="../../index.html" class="nav-btn nav-btn--ghost">Trang chủ Portfolio</a>
+      </div>
+      <span class="ex-label">Lab 08 · Exercise 04</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro-card">
+      <h1>Quản lý danh sách sản phẩm mini (Array, Object &amp; Function)</h1>
+      <p>Thực hành thao tác mảng dữ liệu Object với <code>filter()</code>, <code>map()</code>, <code>reduce()</code>, <code>sort()</code> và các hàm xử lý nghiệp vụ có thể tái sử dụng.</p>
+    </section>
+
+    <!-- Summary KPI cards via reduce() -->
+    <section class="kpi-grid" aria-label="Thống kê kho hàng bằng reduce">
+      <div class="kpi-card">
+        <span class="kpi-label">Số mặt hàng (filter)</span>
+        <strong id="kpiCount" class="kpi-value">0</strong>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Tổng tồn kho (reduce)</span>
+        <strong id="kpiStock" class="kpi-value">0</strong>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Giá trị tồn kho (reduce)</span>
+        <strong id="kpiValue" class="kpi-value">0 đ</strong>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Đơn giá trung bình</span>
+        <strong id="kpiAvg" class="kpi-value">0 đ</strong>
+      </div>
+    </section>
+
+    <div class="layout-split">
+      <!-- Add Product Form -->
+      <section class="panel">
+        <h2>Thêm sản phẩm mới (Object)</h2>
+        <form id="addProductForm" class="form-grid">
+          <div class="field">
+            <label for="prodName">Tên sản phẩm</label>
+            <input type="text" id="prodName" placeholder="VD: Khuôn Tart đế rời 18cm" required>
+          </div>
+          <div class="field">
+            <label for="prodCategory">Danh mục</label>
+            <select id="prodCategory">
+              <option value="Nguyên liệu">Nguyên liệu</option>
+              <option value="Sữa & Bơ">Sữa &amp; Bơ</option>
+              <option value="Dụng cụ">Dụng cụ</option>
+              <option value="Topping">Topping</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="prodPrice">Đơn giá (VNĐ)</label>
+            <input type="number" id="prodPrice" min="1000" step="1000" value="65000" required>
+          </div>
+          <div class="field">
+            <label for="prodStock">Số lượng tồn</label>
+            <input type="number" id="prodStock" min="0" value="20" required>
+          </div>
+          <button type="submit" class="btn btn--primary">+ Thêm vào mảng sản phẩm</button>
+        </form>
+      </section>
+
+      <!-- Filter, Sort & Table -->
+      <section class="panel">
+        <div class="toolbar">
+          <input type="text" id="searchInput" placeholder="Lọc theo tên sản phẩm...">
+          <select id="categoryFilter">
+            <option value="all">Tất cả danh mục</option>
+            <option value="Nguyên liệu">Nguyên liệu</option>
+            <option value="Sữa & Bơ">Sữa &amp; Bơ</option>
+            <option value="Dụng cụ">Dụng cụ</option>
+            <option value="Topping">Topping</option>
+          </select>
+          <select id="sortSelect">
+            <option value="default">Sắp xếp mặc định</option>
+            <option value="price-asc">Giá tăng dần (sort)</option>
+            <option value="price-desc">Giá giảm dần (sort)</option>
+            <option value="stock-desc">Tồn kho nhiều nhất</option>
+          </select>
+          <label class="toggle-discount">
+            <input type="checkbox" id="discountPreviewToggle">
+            <span>Xem giá giảm 10% (map)</span>
+          </label>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Mã</th>
+                <th>Sản phẩm</th>
+                <th>Danh mục</th>
+                <th>Đơn giá</th>
+                <th>Tồn kho</th>
+                <th>Thành tiền tồn</th>
+              </tr>
+            </thead>
+            <tbody id="productBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

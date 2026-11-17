@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 08 — JavaScript 1: Language Foundations | Hồ Gia Bảo</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .lab-hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: #fff;
+      padding: 36px 0;
+    }
+    .breadcrumb {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      font-size: 14px;
+      margin-bottom: 14px;
+      color: #cbd5e1;
+    }
+    .breadcrumb a {
+      color: #93c5fd;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    .lab-hero h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+    .lab-hero p {
+      color: #dbeafe;
+      max-width: 760px;
+      font-size: 15px;
+    }
+    .ex-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      margin: 32px 0;
+    }
+    .ex-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .ex-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
+    }
+    .ex-card__badge {
+      display: inline-block;
+      align-self: flex-start;
+      background: var(--accent-bg);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+    .ex-card h2 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+    .ex-card p {
+      font-size: 14.5px;
+      color: var(--muted);
+      flex-grow: 1;
+      margin-bottom: 18px;
+    }
+    .lab-nav-footer {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .btn--outline {
+      background: var(--surface);
+      color: var(--primary);
+      border: 1px solid var(--border);
+    }
+    .btn--outline:hover {
+      background: var(--accent-bg);
+    }
+    @media (max-width: 760px) {
+      .ex-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="lab-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">← Trang chủ Portfolio</a>
+        <span>/</span>
+        <span>Lab 08 — JavaScript 1: Language Foundations</span>
+      </nav>
+      <h1>Lab 08 — JavaScript 1: Language Foundations</h1>
+      <p>Thực hành nền tảng ngôn ngữ JavaScript: nhúng mã nguồn Internal/External, kiểm tra dữ liệu qua Browser Console, cấu trúc điều khiển, làm việc với String, Date, Array, Object và Function.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="ex-grid" aria-label="Danh sách Exercise Lab 08">
+      <article class="ex-card">
+        <span class="ex-card__badge">Exercise 01</span>
+        <h2>Nhúng JS &amp; Browser Console</h2>
+        <p>Thực hành nhúng JavaScript theo cả hai cách Internal và External, xuất thông tin ra giao diện HTML và kiểm tra biến, bảng dữ liệu bằng <code>console.log</code>, <code>console.table</code>.</p>
+        <a href="Exercise01/index.html" class="btn btn--primary">Chạy Exercise 01 →</a>
+      </article>
+
+      <article class="ex-card">
+        <span class="ex-card__badge">Exercise 02</span>
+        <h2>Biến, Toán tử &amp; Cấu trúc điều khiển</h2>
+        <p>Vận dụng <code>let</code>/<code>const</code>, toán tử, <code>if/else</code>, <code>switch</code> và vòng lặp <code>for</code>/<code>while</code> qua bài toán tính chiết khấu đơn hàng và xếp hạng thành viên TMĐT.</p>
+        <a href="Exercise02/index.html" class="btn btn--primary">Chạy Exercise 02 →</a>
+      </article>
+
+      <article class="ex-card">
+        <span class="ex-card__badge">Exercise 03</span>
+        <h2>Làm việc với String &amp; Date</h2>
+        <p>Chuẩn hóa họ tên tiếng Việt, tạo URL slug chuẩn SEO, tìm kiếm từ khóa không dấu kết hợp đồng hồ thời gian thực và bộ đếm ngược Flash Sale bằng đối tượng <code>Date</code>.</p>
+        <a href="Exercise03/index.html" class="btn btn--primary">Chạy Exercise 03 →</a>
+      </article>
+
+      <article class="ex-card">
+        <span class="ex-card__badge">Exercise 04</span>
+        <h2>Array, Object &amp; Function</h2>
+        <p>Ứng dụng quản lý danh sách sản phẩm mini sử dụng các phương thức mảng <code>filter</code>, <code>map</code>, <code>reduce</code>, <code>sort</code> cùng cấu trúc Object và hàm tái sử dụng.</p>
+        <a href="Exercise04/index.html" class="btn btn--primary">Chạy Exercise 04 →</a>
+      </article>
+    </section>
+
+    <div class="lab-nav-footer">
+      <a href="../index.html" class="btn btn--outline">← Về Trang chủ Portfolio</a>
+      <a href="../Lab09/index.html" class="btn btn--primary">Chuyển sang Lab 09 →</a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Hồ Gia Bảo (31241023360) · Lab 08 — JavaScript 1: Language Foundations</p>
+    </div>
+  </footer>
+</body>
+</html>
