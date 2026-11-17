@@ -22,12 +22,12 @@ $(function () {
       $("#selectorFeedback").html(
         `Đã thực thi <code>$("tbody tr:even")</code> (${$even.length} dòng) và <code>$("tbody tr:odd")</code> (${$odd.length} dòng).`
       );
-    } else if (mode === "baking") {
-      const $matched = $rows.filter('[data-category="nguyen-lieu"]');
+    } else if (mode === "phukien") {
+      const $matched = $rows.filter('[data-category="phu-kien"]');
       $rows.not($matched).addClass("row-dim");
       $matched.addClass("row-highlight");
       $("#selectorFeedback").html(
-        `Bộ chọn <code>$('[data-category="nguyen-lieu"]')</code> khớp <strong>${$matched.length}</strong> sản phẩm.`
+        `Bộ chọn <code>$('[data-category="phu-kien"]')</code> khớp <strong>${$matched.length}</strong> sản phẩm UEHMart.`
       );
     } else if (mode === "lowstock") {
       const $matched = $rows.filter('[data-stock="low"]');

@@ -1,38 +1,23 @@
-function escapeXml(str) {
-  return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
-
-function makeGallerySvg(label, detail, c1, c2) {
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 340">
-    <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/></linearGradient></defs>
-    <rect width="600" height="340" fill="url(#g)"/>
-    <rect x="40" y="40" width="520" height="260" rx="20" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.28)" stroke-width="2"/>
-    <text x="50%" y="48%" text-anchor="middle" font-family="system-ui, sans-serif" font-size="28" font-weight="800" fill="#fff">${escapeXml(label)}</text>
-    <text x="50%" y="62%" text-anchor="middle" font-family="system-ui, sans-serif" font-size="17" fill="rgba(255,255,255,0.9)">${escapeXml(detail)}</text>
-  </svg>`;
-  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
-}
-
 const galleryItems = [
   {
     id: 0,
-    caption: "Góc chính diện — Máy đánh trứng 7 tốc độ màu Trắng Ngọc",
-    src: makeGallerySvg("Góc chính diện", "Thiết kế gọn nhẹ · 7 cấp tốc độ", "#1e3a8a", "#3b82f6")
+    caption: "Tai nghe Bluetooth Chống Ồn Chủ Động ANC — Pin 40 giờ (1.290.000₫)",
+    src: "../../images/products/product-demo.jpg"
   },
   {
     id: 1,
-    caption: "Bộ phụ kiện — 2 que đánh kem & 2 que nhào bột inox 304",
-    src: makeGallerySvg("Phụ kiện Inox 304", "4 que trộn chuyên dụng đi kèm", "#0f766e", "#14b8a6")
+    caption: "Bàn phím cơ Không dây 3 Mode Hotswap LED RGB (845.000₫)",
+    src: "../../images/products/Phimgo.jpg"
   },
   {
     id: 2,
-    caption: "Chi tiết nút gạt — Điều chỉnh công suất 180W êm ái",
-    src: makeGallerySvg("Động cơ 180W", "Nút gạt 7 mức · Thoát nhiệt kép", "#7c2d12", "#ea580c")
+    caption: "Sách Nền tảng Phát triển Ứng dụng Web & TMĐT (196.000₫)",
+    src: "../../images/products/docsach.jpg"
   },
   {
     id: 3,
-    caption: "Đóng gói hộp quà — Bảo hành chính hãng 12 tháng",
-    src: makeGallerySvg("Hộp & Bảo hành", "Tem chính hãng · Đổi mới 30 ngày", "#4c1d95", "#8b5cf6")
+    caption: "Chuột không dây Công thái học Silent Type-C (299.000₫)",
+    src: "../../images/products/chuot.jpg"
   }
 ];
 
@@ -49,7 +34,7 @@ const noteCount = document.getElementById("noteCount");
 const eventLogList = document.getElementById("eventLogList");
 const clearEventLog = document.getElementById("clearEventLog");
 
-const UNIT_PRICE = 320000;
+const UNIT_PRICE = 1290000;
 let lockedIndex = 0;
 
 function logEvent(eventName, detail) {

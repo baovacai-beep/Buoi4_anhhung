@@ -11,9 +11,9 @@ const clearDoneBtn = document.getElementById("clearDoneBtn");
 let currentFilter = "all";
 
 const initialItems = [
-  { name: "Bột mì số 13 Baker's Choice", qty: "2 kg", category: "Nguyên liệu khô", done: false },
-  { name: "Bơ lạt Anchor New Zealand", qty: "2 hộp", category: "Sữa & Bơ", done: true },
-  { name: "Giấy nến nướng bánh 30cm", qty: "1 cuộn", category: "Dụng cụ", done: false }
+  { name: "Sách Nền tảng Web & TMĐT Hiện đại", qty: "1 cuốn", category: "Sách học tập", done: false },
+  { name: "Chuột công thái học Silent Type-C", qty: "1 cái", category: "Phụ kiện PC", done: true },
+  { name: "Tai nghe Bluetooth Chống Ồn ANC", qty: "1 bộ", category: "Âm thanh", done: false }
 ];
 
 function createShoppingItemNode(name, qty, category, done = false) {
@@ -106,7 +106,7 @@ shoppingForm.addEventListener("submit", (e) => {
   shoppingList.appendChild(node);
 
   itemNameInput.value = "";
-  itemQtyInput.value = "1 gói";
+  itemQtyInput.value = "1 cái";
   itemNameInput.focus();
   refreshView();
 });

@@ -1,10 +1,10 @@
 const products = [
-  { id: "BM01", name: "Bột mì số 13 Baker's Choice 1kg", category: "Nguyên liệu", price: 32000, stock: 40 },
-  { id: "BM02", name: "Bơ lạt Anchor 227g", category: "Sữa & Bơ", price: 78000, stock: 25 },
-  { id: "BM03", name: "Whipping Cream Anchor 1L", category: "Sữa & Bơ", price: 165000, stock: 12 },
-  { id: "BM04", name: "Chocolate đen 70% Puratos 500g", category: "Topping", price: 115000, stock: 18 },
-  { id: "BM05", name: "Khuôn tròn đế rời 20cm", category: "Dụng cụ", price: 95000, stock: 30 },
-  { id: "BM06", name: "Men nở ngọt Instant Mauripan 50g", category: "Nguyên liệu", price: 18000, stock: 60 }
+  { id: "UM01", name: "Tai nghe Bluetooth Chống Ồn ANC", category: "Âm thanh", price: 1290000, stock: 24 },
+  { id: "UM02", name: "Bàn phím cơ Không dây 3 Mode RGB", category: "Phụ kiện PC", price: 845000, stock: 18 },
+  { id: "UM03", name: "Sách Nền tảng Web & TMĐT Hiện đại", category: "Sách công nghệ", price: 196000, stock: 45 },
+  { id: "UM04", name: "Chuột không dây Công thái học Silent", category: "Phụ kiện PC", price: 299000, stock: 32 },
+  { id: "UM05", name: "Giá đỡ Laptop hợp kim nhôm", category: "Phụ kiện PC", price: 245000, stock: 27 },
+  { id: "UM06", name: "Đèn bàn học chống cận cảm ứng", category: "Gia dụng", price: 320000, stock: 15 }
 ];
 
 const kpiCountEl = document.getElementById("kpiCount");
@@ -120,7 +120,7 @@ addProductForm.addEventListener("submit", (e) => {
   if (!name) return;
 
   const newProduct = {
-    id: `BM${String(products.length + 1).padStart(2, "0")}`,
+    id: `UM${String(products.length + 1).padStart(2, "0")}`,
     name,
     category,
     price,
@@ -130,7 +130,7 @@ addProductForm.addEventListener("submit", (e) => {
   products.push(newProduct);
   console.table(products);
   addProductForm.reset();
-  document.getElementById("prodPrice").value = 65000;
+  document.getElementById("prodPrice").value = 350000;
   document.getElementById("prodStock").value = 20;
   renderProducts();
 });

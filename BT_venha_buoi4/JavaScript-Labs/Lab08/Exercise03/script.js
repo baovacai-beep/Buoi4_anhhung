@@ -17,12 +17,12 @@ const searchMetaEl = document.getElementById("searchMeta");
 const searchResultListEl = document.getElementById("searchResultList");
 
 const catalogItems = [
-  { name: "Bánh mì hoa cúc Pháp Harrys", price: 125000 },
-  { name: "Bơ lạt Anchor New Zealand 227g", price: 78000 },
-  { name: "Socola đen nguyên chất 70%", price: 115000 },
-  { name: "Phô mai kem Cream Cheese Elle & Vire", price: 145000 },
-  { name: "Bột mì làm bánh mì số 13", price: 32000 },
-  { name: "Trà xanh Matcha Nhật Bản Uji", price: 185000 }
+  { name: "Tai Nghe Bluetooth Chống Ồn Chủ Động ANC", price: 1290000 },
+  { name: "Bàn Phím Cơ Không Dây 3 Mode LED RGB", price: 845000 },
+  { name: "Sách Nền Tảng Phát Triển Ứng Dụng Web & TMĐT", price: 196000 },
+  { name: "Chuột Không Dây Công Thái Học Silent Type-C", price: 299000 },
+  { name: "Giá Đỡ Laptop Hợp Kim Nhôm Gập Gọn", price: 245000 },
+  { name: "Đèn Bàn Học Chống Cận LED Cảm Ứng", price: 320000 }
 ];
 
 // --- 1. ĐỒNG HỒ & ĐẾM NGƯỢC DATE ---
@@ -108,7 +108,7 @@ function updateStringDemo() {
   const wordCount = cleaned ? cleaned.split(" ").length : 0;
 
   normalizedNameEl.textContent = cleaned || "(Trống)";
-  generatedSlugEl.textContent = slug ? `https://bakemate.vn/san-pham/${slug}` : "(Chưa có slug)";
+  generatedSlugEl.textContent = slug ? `https://uehmart.vn/san-pham/${slug}` : "(Chưa có slug)";
   stringStatsEl.textContent = `${cleaned.length} ký tự sau khi rút gọn khoảng trắng · ${wordCount} từ`;
 }
 

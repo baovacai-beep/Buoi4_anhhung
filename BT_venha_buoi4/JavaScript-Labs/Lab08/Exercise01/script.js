@@ -1,15 +1,15 @@
 // External JavaScript cho Lab 08 - Exercise 01
 
-const shopName = "BakeMate Store";
+const shopName = "UEHMart";
 const labNumber = 8;
 const isPublished = true;
-const discountRate = 0.15;
+const discountRate = 0.28;
 
 const sampleProducts = [
-  { id: "SP01", name: "Bột mì số 13 Baker's Choice", category: "Nguyên liệu", price: 32000, stock: 45 },
-  { id: "SP02", name: "Bơ lạt Anchor 227g", category: "Sữa & Bơ", price: 78000, stock: 22 },
-  { id: "SP03", name: "Chocolate đen 70% Puratos", category: "Topping", price: 115000, stock: 16 },
-  { id: "SP04", name: "Khuôn bánh tròn chống dính 20cm", category: "Dụng cụ", price: 95000, stock: 30 }
+  { id: "SP01", name: "Tai nghe Bluetooth Chống Ồn ANC", category: "Thiết bị âm thanh", price: 1290000, stock: 24 },
+  { id: "SP02", name: "Bàn phím cơ không dây 3 Mode RGB", category: "Phụ kiện máy tính", price: 845000, stock: 18 },
+  { id: "SP03", name: "Sách Nền tảng Web & TMĐT Hiện đại", category: "Sách công nghệ", price: 196000, stock: 45 },
+  { id: "SP04", name: "Chuột không dây công thái học Silent", category: "Phụ kiện laptop", price: 299000, stock: 32 }
 ];
 
 const externalOutput = document.getElementById("externalOutput");
