@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Anh Hùng Javascript - Đấu Trường Bật Nảy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anh Hùng Javascript - Đấu Trường Thảo Nguyên Hoa Cỏ</title>
     <style>
         * {
             box-sizing: border-box;
@@ -13,12 +14,33 @@
 
         body {
             margin: 0;
-            padding: 14px;
-            background: linear-gradient(rgba(10, 6, 16, 0.88), rgba(18, 6, 12, 0.94)), url('images/wanda.jpg');
-            background-size: cover;
-            background-position: center;
+            padding: 16px;
             min-height: 100vh;
-            color: #fff;
+            background: linear-gradient(180deg, #74c0fc 0%, #a5d8ff 42%, #d8f5a2 75%, #8ce99a 100%);
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Canvas nền thiên nhiên: bầu trời, hoa cỏ & người đi qua lại */
+        #sceneryCanvas {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Lớp nội dung chính nổi trên nền */
+        .game-shell {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 1060px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -27,85 +49,126 @@
         /* Thanh thông tin trên cùng */
         .top-hud {
             width: 100%;
-            max-width: 1040px;
-            background: rgba(20, 12, 28, 0.9);
-            border: 1px solid rgba(255, 64, 105, 0.5);
-            border-radius: 12px;
-            padding: 10px 18px;
+            background: rgba(16, 40, 28, 0.78);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(169, 227, 75, 0.45);
+            border-radius: 16px;
+            padding: 12px 20px;
             margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 8px 28px rgba(10, 35, 20, 0.28);
         }
 
         .hero-id {
             font-size: 14px;
-            color: #ffd54f;
-            font-weight: 600;
+            color: #ffe066;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+
+        .controls-hint {
+            font-size: 13px;
+            color: #e6fcf5;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 6px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
         }
 
         .bars-container {
             width: 100%;
-            max-width: 1040px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 14px;
             margin-bottom: 12px;
         }
 
-        .stat-card {
-            background: rgba(18, 12, 24, 0.92);
-            border: 1px solid #444;
-            border-radius: 10px;
-            padding: 10px 14px;
+        @media (max-width: 720px) {
+            .bars-container {
+                grid-template-columns: 1fr;
+            }
         }
 
-        .hero-card { border-color: #ff2a55; }
-        .dragon-card { border-color: #ff9100; }
+        .stat-card {
+            background: rgba(16, 40, 28, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 14px;
+            padding: 12px 16px;
+            box-shadow: 0 8px 24px rgba(10, 35, 20, 0.25);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(10, 35, 20, 0.34);
+        }
+
+        .hero-card {
+            border-color: rgba(255, 107, 157, 0.65);
+        }
+
+        .dragon-card {
+            border-color: rgba(255, 169, 77, 0.7);
+        }
 
         .card-header {
             display: flex;
             justify-content: space-between;
-            font-weight: bold;
+            align-items: center;
+            font-weight: 700;
             font-size: 15px;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
+            color: #ffffff;
         }
 
         .hp-track {
             width: 100%;
             height: 18px;
-            background: #2a2a2a;
-            border-radius: 9px;
+            background: rgba(0, 0, 0, 0.38);
+            border-radius: 999px;
             overflow: hidden;
-            border: 1px solid #555;
-            margin-bottom: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            margin-bottom: 8px;
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.45);
         }
 
         .hp-fill {
             height: 100%;
             width: 100%;
             transition: width 0.15s linear;
+            border-radius: 999px;
+            position: relative;
         }
 
-        .hero-hp { background: linear-gradient(90deg, #00e676, #00b0ff); }
-        .dragon-hp { background: linear-gradient(90deg, #ff3d00, #ffab00); }
+        .hero-hp {
+            background: linear-gradient(90deg, #20c997, #51cf66, #94d82d);
+        }
+
+        .dragon-hp {
+            background: linear-gradient(90deg, #ff5722, #ff922b, #fcc419);
+        }
 
         .sub-stats {
             display: flex;
             justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 6px;
             font-size: 13px;
-            color: #cfd8dc;
+            color: #d8f5a2;
         }
 
-        /* Bố cục Sân đấu vuông + Lịch sử bên cạnh */
+        /* Bố cục Sân đấu + Lịch sử bên cạnh */
         .main-stage {
             width: 100%;
-            max-width: 1040px;
             display: flex;
-            gap: 14px;
+            gap: 16px;
             align-items: stretch;
             justify-content: center;
             flex-wrap: wrap;
@@ -113,14 +176,14 @@
 
         .canvas-wrap {
             position: relative;
-            border: 3px solid #ff2a55;
-            border-radius: 12px;
+            border: 3px solid rgba(169, 227, 75, 0.75);
+            border-radius: 18px;
             overflow: hidden;
-            box-shadow: 0 0 28px rgba(255, 42, 85, 0.4);
-            background: #120b18;
+            box-shadow: 0 14px 36px rgba(13, 46, 26, 0.42), 0 0 0 4px rgba(255, 255, 255, 0.22);
+            background: #1b432c;
         }
 
-        canvas {
+        canvas#gameCanvas {
             display: block;
             cursor: crosshair;
         }
@@ -128,8 +191,7 @@
         /* Bảng điều khiển kỹ năng */
         .skill-bar {
             width: 100%;
-            max-width: 1040px;
-            margin-top: 12px;
+            margin-top: 14px;
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
@@ -138,25 +200,52 @@
 
         .skill-btn {
             position: relative;
-            padding: 10px 16px;
+            padding: 11px 18px;
             font-size: 14px;
-            font-weight: bold;
-            border: 2px solid rgba(255, 255, 255, 0.25);
-            border-radius: 10px;
+            font-weight: 700;
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            border-radius: 14px;
             cursor: pointer;
             color: #fff;
             min-width: 175px;
             overflow: hidden;
-            transition: transform 0.1s, filter 0.15s;
+            box-shadow: 0 6px 18px rgba(10, 35, 20, 0.28);
+            transition: transform 0.14s ease, filter 0.15s ease, box-shadow 0.15s ease;
         }
 
-        .skill-btn:hover:not(:disabled) { transform: translateY(-2px); filter: brightness(1.12); }
-        .skill-btn:disabled { cursor: not-allowed; opacity: 0.65; }
+        .skill-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            filter: brightness(1.08);
+            box-shadow: 0 10px 22px rgba(10, 35, 20, 0.36);
+        }
 
-        .btn-ranged { background: linear-gradient(135deg, #d50000, #ff1744); }
-        .btn-melee { background: linear-gradient(135deg, #aa00ff, #e040fb); }
-        .btn-ult { background: linear-gradient(135deg, #ff6d00, #ffab00); color: #111; }
-        .btn-util { background: #263238; min-width: 120px; }
+        .skill-btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .skill-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.68;
+        }
+
+        .btn-ranged {
+            background: linear-gradient(135deg, #f03e3e, #ff6b6b);
+        }
+
+        .btn-melee {
+            background: linear-gradient(135deg, #ae3ec9, #da77f2);
+        }
+
+        .btn-ult {
+            background: linear-gradient(135deg, #f76707, #fcc419);
+            color: #1f1400;
+        }
+
+        .btn-util {
+            background: rgba(20, 52, 36, 0.85);
+            backdrop-filter: blur(8px);
+            min-width: 125px;
+        }
 
         .cd-overlay {
             position: absolute;
@@ -164,7 +253,7 @@
             bottom: 0;
             width: 100%;
             height: 0%;
-            background: rgba(0, 0, 0, 0.65);
+            background: rgba(0, 0, 0, 0.58);
             pointer-events: none;
         }
 
@@ -173,20 +262,23 @@
             flex: 1;
             min-width: 280px;
             max-width: 380px;
-            background: rgba(16, 12, 22, 0.92);
-            border: 1px solid #444;
-            border-radius: 12px;
-            padding: 12px;
+            background: rgba(16, 40, 28, 0.82);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(169, 227, 75, 0.45);
+            border-radius: 18px;
+            padding: 14px 16px;
             display: flex;
             flex-direction: column;
+            box-shadow: 0 12px 30px rgba(10, 35, 20, 0.3);
         }
 
         .log-box h3 {
-            margin: 0 0 8px 0;
+            margin: 0 0 10px 0;
             font-size: 15px;
-            color: #ffd54f;
-            border-bottom: 1px solid #333;
-            padding-bottom: 6px;
+            color: #ffe066;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+            padding-bottom: 8px;
         }
 
         #battleLog {
@@ -194,85 +286,519 @@
             height: 490px;
             overflow-y: auto;
             font-size: 13px;
-            line-height: 1.55;
-            padding-right: 4px;
+            line-height: 1.6;
+            padding-right: 6px;
         }
 
-        .log-hero { color: #ff80ab; }
-        .log-melee { color: #ea80fc; font-weight: bold; }
-        .log-dragon { color: #ffb74d; }
-        .log-crit { color: #ff5252; font-weight: bold; }
-        .log-dodge { color: #80deea; font-style: italic; }
-        .log-win { color: #69f0ae; font-size: 14px; font-weight: bold; }
-        .log-lose { color: #ff5252; font-size: 14px; font-weight: bold; }
+        #battleLog::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #battleLog::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 999px;
+        }
+
+        #battleLog::-webkit-scrollbar-thumb {
+            background: rgba(169, 227, 75, 0.45);
+            border-radius: 999px;
+        }
+
+        .log-hero { color: #ff87b2; }
+        .log-melee { color: #e599f7; font-weight: bold; }
+        .log-dragon { color: #ffc078; }
+        .log-crit { color: #ff6b6b; font-weight: bold; }
+        .log-dodge { color: #99e9f2; font-style: italic; }
+        .log-win { color: #69db7c; font-size: 14px; font-weight: bold; }
+        .log-lose { color: #ff6b6b; font-size: 14px; font-weight: bold; }
     </style>
 </head>
 
 <body>
-    <div class="top-hud">
-        <div class="hero-id" id="heroIdentity">Đang khởi tạo Anh Hùng...</div>
-        <div style="font-size: 13px; color: #b0bec5;">
-            🎯 Di chuột để nhắm | <b>Click Trái / [1]</b> Bắn cầu | <b>Click Phải / [2] / Space</b> Chém cận chiến | <b>[3] / E</b> Tuyệt chiêu
+    <!-- Nền thiên nhiên sống động: hoa cỏ đung đưa & người đi qua lại -->
+    <canvas id="sceneryCanvas"></canvas>
+
+    <div class="game-shell">
+        <div class="top-hud">
+            <div class="hero-id" id="heroIdentity">Đang khởi tạo Anh Hùng...</div>
+            <div class="controls-hint">
+                🌸 Di chuột để nhắm | <b>Click Trái / [1]</b> Bắn cầu | <b>Click Phải / [2] / Space</b> Chém | <b>[3] / E</b> Tuyệt chiêu
+            </div>
+        </div>
+
+        <div class="bars-container">
+            <div class="stat-card hero-card">
+                <div class="card-header">
+                    <span id="heroNameLabel">Anh Hùng</span>
+                    <span id="heroHpLabel">HP: 315 / 315</span>
+                </div>
+                <div class="hp-track">
+                    <div class="hp-fill hero-hp" id="heroHpBar"></div>
+                </div>
+                <div class="sub-stats" id="heroStatsLabel">
+                    <span>STR: 59 | AGI: 78 | INT: 28</span>
+                    <span>Cấp: 5 | XP: 1250</span>
+                </div>
+            </div>
+
+            <div class="stat-card dragon-card">
+                <div class="card-header">
+                    <span>🐉 Rồng Già Cổ Đại</span>
+                    <span id="dragonHpLabel">HP: 600 / 600</span>
+                </div>
+                <div class="hp-track">
+                    <div class="hp-fill dragon-hp" id="dragonHpBar"></div>
+                </div>
+                <div class="sub-stats">
+                    <span>STR: 100 | AGI: 15 | INT: 80</span>
+                    <span id="dragonStateLabel">Trạng thái: Đang bay lượn</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-stage">
+            <div class="canvas-wrap">
+                <canvas id="gameCanvas" width="620" height="540"></canvas>
+            </div>
+
+            <div class="log-box">
+                <h3>🌼 Lịch sử chiến đấu & né đòn</h3>
+                <div id="battleLog"></div>
+            </div>
+        </div>
+
+        <div class="skill-bar">
+            <button class="skill-btn btn-ranged" id="btnSkill1" onclick="suDungChieuBan()">
+                🔮 [1] Cầu Hỗn Mang
+                <div class="cd-overlay" id="cd1"></div>
+            </button>
+            <button class="skill-btn btn-melee" id="btnSkill2" onclick="suDungChieuChem()">
+                ⚔️ [2] Chém Cận Chiến
+                <div class="cd-overlay" id="cd2"></div>
+            </button>
+            <button class="skill-btn btn-ult" id="btnSkill3" onclick="suDungTuyetChieu()">
+                💥 [3] Bão Năng Lượng + Hồi Máu
+                <div class="cd-overlay" id="cd3"></div>
+            </button>
+            <button class="skill-btn btn-util" id="btnSound" onclick="batTatAmThanh()">🔊 Âm: BẬT</button>
+            <button class="skill-btn btn-util" onclick="khoiDongLaiTranDau()">🔄 Chơi Lại</button>
         </div>
     </div>
 
-    <div class="bars-container">
-        <div class="stat-card hero-card">
-            <div class="card-header">
-                <span id="heroNameLabel">Anh Hùng</span>
-                <span id="heroHpLabel">HP: 315 / 315</span>
-            </div>
-            <div class="hp-track">
-                <div class="hp-fill hero-hp" id="heroHpBar"></div>
-            </div>
-            <div class="sub-stats" id="heroStatsLabel">
-                <span>STR: 59 | AGI: 78 | INT: 28</span>
-                <span>Cấp: 5 | XP: 1250</span>
-            </div>
-        </div>
+    <!-- Script hiệu ứng nền hoa cỏ & người đi qua lại -->
+    <script>
+        (function () {
+            const bgCanvas = document.getElementById("sceneryCanvas");
+            const bgCtx = bgCanvas.getContext("2d");
 
-        <div class="stat-card dragon-card">
-            <div class="card-header">
-                <span>🐉 Rồng Già Cổ Đại</span>
-                <span id="dragonHpLabel">HP: 600 / 600</span>
-            </div>
-            <div class="hp-track">
-                <div class="hp-fill dragon-hp" id="dragonHpBar"></div>
-            </div>
-            <div class="sub-stats">
-                <span>STR: 100 | AGI: 15 | INT: 80</span>
-                <span id="dragonStateLabel">Trạng thái: Đang bay lượn</span>
-            </div>
-        </div>
-    </div>
+            let W = 0;
+            let H = 0;
+            let clouds = [];
+            let grassBlades = [];
+            let flowers = [];
+            let petals = [];
+            let butterflies = [];
+            let walkers = [];
 
-    <div class="main-stage">
-        <div class="canvas-wrap">
-            <canvas id="gameCanvas" width="620" height="540"></canvas>
-        </div>
+            const FLOWER_COLORS = ["#ff6b8b", "#ffd43b", "#ffffff", "#da77f2", "#ff922b", "#74c0fc"];
+            const SHIRT_COLORS = ["#ff6b6b", "#339af0", "#fcc419", "#51cf66", "#cc5de8", "#ff922b", "#20c997", "#f06595"];
+            const HAIR_COLORS = ["#2b2d42", "#5c3d2e", "#d4a373", "#8d5524", "#495057"];
 
-        <div class="log-box">
-            <h3>📜 Lịch sử chiến đấu & né đòn</h3>
-            <div id="battleLog"></div>
-        </div>
-    </div>
+            function initSceneObjects() {
+                clouds = [];
+                for (let i = 0; i < 6; i++) {
+                    clouds.push({
+                        x: Math.random() * W,
+                        y: 35 + Math.random() * (H * 0.25),
+                        scale: 0.65 + Math.random() * 0.75,
+                        speed: 10 + Math.random() * 14
+                    });
+                }
 
-    <div class="skill-bar">
-        <button class="skill-btn btn-ranged" id="btnSkill1" onclick="suDungChieuBan()">
-            🔮 [1] Cầu Hỗn Mang
-            <div class="cd-overlay" id="cd1"></div>
-        </button>
-        <button class="skill-btn btn-melee" id="btnSkill2" onclick="suDungChieuChem()">
-            ⚔️ [2] Chém Cận Chiến
-            <div class="cd-overlay" id="cd2"></div>
-        </button>
-        <button class="skill-btn btn-ult" id="btnSkill3" onclick="suDungTuyetChieu()">
-            💥 [3] Bão Năng Lượng + Hồi Máu
-            <div class="cd-overlay" id="cd3"></div>
-        </button>
-        <button class="skill-btn btn-util" id="btnSound" onclick="batTatAmThanh()">🔊 Âm: BẬT</button>
-        <button class="skill-btn btn-util" onclick="khoiDongLaiTranDau()">🔄 Chơi Lại</button>
-    </div>
+                grassBlades = [];
+                const grassCount = Math.max(90, Math.floor(W / 10));
+                for (let i = 0; i < grassCount; i++) {
+                    grassBlades.push({
+                        x: Math.random() * W,
+                        y: H - 10 - Math.random() * 115,
+                        height: 16 + Math.random() * 24,
+                        swayOffset: Math.random() * Math.PI * 2,
+                        color: Math.random() > 0.5 ? "#2b8a3e" : "#40c057"
+                    });
+                }
+
+                flowers = [];
+                const flowerCount = Math.max(42, Math.floor(W / 24));
+                for (let i = 0; i < flowerCount; i++) {
+                    flowers.push({
+                        x: Math.random() * W,
+                        y: H - 12 - Math.random() * 110,
+                        stemH: 18 + Math.random() * 24,
+                        radius: 4.5 + Math.random() * 4.5,
+                        color: FLOWER_COLORS[Math.floor(Math.random() * FLOWER_COLORS.length)],
+                        swayOffset: Math.random() * Math.PI * 2,
+                        type: Math.random() > 0.35 ? "daisy" : "tulip"
+                    });
+                }
+
+                petals = [];
+                for (let i = 0; i < 24; i++) {
+                    petals.push({
+                        x: Math.random() * W,
+                        y: Math.random() * H,
+                        vx: 18 + Math.random() * 25,
+                        vy: 14 + Math.random() * 22,
+                        size: 3 + Math.random() * 3.5,
+                        rot: Math.random() * Math.PI * 2,
+                        rotSpeed: (Math.random() - 0.5) * 2.5,
+                        color: Math.random() > 0.5 ? "rgba(255, 182, 193, 0.85)" : "rgba(255, 243, 191, 0.85)"
+                    });
+                }
+
+                butterflies = [];
+                for (let i = 0; i < 5; i++) {
+                    butterflies.push({
+                        x: Math.random() * W,
+                        y: H * 0.55 + Math.random() * (H * 0.3),
+                        vx: (Math.random() > 0.5 ? 1 : -1) * (25 + Math.random() * 20),
+                        phase: Math.random() * Math.PI * 2,
+                        color: Math.random() > 0.5 ? "#ffd43b" : "#f783ac"
+                    });
+                }
+
+                walkers = [];
+                const walkerCount = 9;
+                for (let i = 0; i < walkerCount; i++) {
+                    const dir = i % 2 === 0 ? 1 : -1;
+                    walkers.push({
+                        x: Math.random() * W,
+                        laneY: H - 46 + (Math.random() - 0.5) * 24,
+                        dir: dir,
+                        speed: 32 + Math.random() * 34,
+                        scale: 0.85 + Math.random() * 0.3,
+                        shirt: SHIRT_COLORS[i % SHIRT_COLORS.length],
+                        pants: i % 3 === 0 ? "#364fc7" : "#343a40",
+                        hair: HAIR_COLORS[i % HAIR_COLORS.length],
+                        hasHat: i % 3 === 1,
+                        hasUmbrella: i % 4 === 2,
+                        hasDog: i === 0 || i === 5,
+                        phase: Math.random() * Math.PI * 2
+                    });
+                }
+            }
+
+            function resize() {
+                W = bgCanvas.width = window.innerWidth;
+                H = bgCanvas.height = window.innerHeight;
+                initSceneObjects();
+            }
+
+            window.addEventListener("resize", resize);
+            resize();
+
+            function drawCloud(c) {
+                bgCtx.save();
+                bgCtx.translate(c.x, c.y);
+                bgCtx.scale(c.scale, c.scale);
+                bgCtx.fillStyle = "rgba(255, 255, 255, 0.82)";
+                bgCtx.beginPath();
+                bgCtx.arc(0, 0, 24, 0, Math.PI * 2);
+                bgCtx.arc(24, -8, 30, 0, Math.PI * 2);
+                bgCtx.arc(54, -2, 24, 0, Math.PI * 2);
+                bgCtx.arc(26, 10, 22, 0, Math.PI * 2);
+                bgCtx.fill();
+                bgCtx.restore();
+            }
+
+            function drawHills(time) {
+                // Mặt trời dịu nhẹ
+                const sunX = W * 0.88;
+                const sunY = H * 0.14;
+                const sunGrad = bgCtx.createRadialGradient(sunX, sunY, 10, sunX, sunY, 90);
+                sunGrad.addColorStop(0, "rgba(255, 243, 176, 0.95)");
+                sunGrad.addColorStop(0.4, "rgba(255, 224, 102, 0.45)");
+                sunGrad.addColorStop(1, "rgba(255, 224, 102, 0)");
+                bgCtx.fillStyle = sunGrad;
+                bgCtx.beginPath();
+                bgCtx.arc(sunX, sunY, 90, 0, Math.PI * 2);
+                bgCtx.fill();
+
+                // Đồi xa
+                bgCtx.fillStyle = "#8ce99a";
+                bgCtx.beginPath();
+                bgCtx.moveTo(0, H);
+                bgCtx.lineTo(0, H - 180);
+                for (let x = 0; x <= W; x += 40) {
+                    const y = H - 175 + Math.sin(x * 0.005 + 1.2) * 32;
+                    bgCtx.lineTo(x, y);
+                }
+                bgCtx.lineTo(W, H);
+                bgCtx.closePath();
+                bgCtx.fill();
+
+                // Đồi gần
+                bgCtx.fillStyle = "#51cf66";
+                bgCtx.beginPath();
+                bgCtx.moveTo(0, H);
+                bgCtx.lineTo(0, H - 130);
+                for (let x = 0; x <= W; x += 40) {
+                    const y = H - 125 + Math.cos(x * 0.007) * 24;
+                    bgCtx.lineTo(x, y);
+                }
+                bgCtx.lineTo(W, H);
+                bgCtx.closePath();
+                bgCtx.fill();
+
+                // Con đường dạo bộ cho người đi qua lại
+                const pathTop = H - 72;
+                const pathH = 44;
+                const pathGrad = bgCtx.createLinearGradient(0, pathTop, 0, pathTop + pathH);
+                pathGrad.addColorStop(0, "#f3d9b1");
+                pathGrad.addColorStop(1, "#e6c28e");
+                bgCtx.fillStyle = pathGrad;
+                bgCtx.fillRect(0, pathTop, W, pathH);
+
+                // Viền cỏ dưới cùng
+                bgCtx.fillStyle = "#37b24d";
+                bgCtx.fillRect(0, pathTop + pathH, W, H - (pathTop + pathH));
+            }
+
+            function drawGrassAndFlowers(time) {
+                for (const g of grassBlades) {
+                    const sway = Math.sin(time * 2.2 + g.swayOffset) * 5;
+                    bgCtx.strokeStyle = g.color;
+                    bgCtx.lineWidth = 2.2;
+                    bgCtx.lineCap = "round";
+                    bgCtx.beginPath();
+                    bgCtx.moveTo(g.x, g.y);
+                    bgCtx.quadraticCurveTo(g.x + sway * 0.5, g.y - g.height * 0.5, g.x + sway, g.y - g.height);
+                    bgCtx.stroke();
+                }
+
+                for (const f of flowers) {
+                    const sway = Math.sin(time * 2.0 + f.swayOffset) * 6;
+                    const topX = f.x + sway;
+                    const topY = f.y - f.stemH;
+
+                    // Thân hoa
+                    bgCtx.strokeStyle = "#2b8a3e";
+                    bgCtx.lineWidth = 2;
+                    bgCtx.beginPath();
+                    bgCtx.moveTo(f.x, f.y);
+                    bgCtx.quadraticCurveTo(f.x + sway * 0.4, f.y - f.stemH * 0.5, topX, topY);
+                    bgCtx.stroke();
+
+                    // Bông hoa
+                    bgCtx.save();
+                    bgCtx.translate(topX, topY);
+                    if (f.type === "daisy") {
+                        bgCtx.fillStyle = f.color;
+                        for (let p = 0; p < 5; p++) {
+                            const ang = (p * Math.PI * 2) / 5 + sway * 0.03;
+                            bgCtx.beginPath();
+                            bgCtx.arc(Math.cos(ang) * f.radius * 0.85, Math.sin(ang) * f.radius * 0.85, f.radius * 0.55, 0, Math.PI * 2);
+                            bgCtx.fill();
+                        }
+                        bgCtx.fillStyle = "#fcc419";
+                        bgCtx.beginPath();
+                        bgCtx.arc(0, 0, f.radius * 0.45, 0, Math.PI * 2);
+                        bgCtx.fill();
+                    } else {
+                        bgCtx.fillStyle = f.color;
+                        bgCtx.beginPath();
+                        bgCtx.arc(0, 0, f.radius * 0.9, 0, Math.PI, false);
+                        bgCtx.lineTo(-f.radius * 0.9, -f.radius * 0.7);
+                        bgCtx.lineTo(0, -f.radius * 0.25);
+                        bgCtx.lineTo(f.radius * 0.9, -f.radius * 0.7);
+                        bgCtx.closePath();
+                        bgCtx.fill();
+                    }
+                    bgCtx.restore();
+                }
+            }
+
+            function drawWalker(w, time) {
+                const walkCycle = time * (w.speed * 0.16) + w.phase;
+                const legSwing = Math.sin(walkCycle) * 7;
+                const armSwing = Math.cos(walkCycle) * 6;
+                const bob = Math.abs(Math.sin(walkCycle)) * 2.5;
+
+                bgCtx.save();
+                bgCtx.translate(w.x, w.laneY - bob);
+                bgCtx.scale(w.dir * w.scale, w.scale);
+
+                // Bóng dưới chân
+                bgCtx.fillStyle = "rgba(0, 0, 0, 0.16)";
+                bgCtx.beginPath();
+                bgCtx.ellipse(0, 22 + bob, 11, 3.5, 0, 0, Math.PI * 2);
+                bgCtx.fill();
+
+                // Chú cún nhỏ đi cùng
+                if (w.hasDog) {
+                    bgCtx.save();
+                    bgCtx.translate(18, 15 + Math.sin(walkCycle * 1.4) * 1.2);
+                    bgCtx.fillStyle = "#d99b66";
+                    bgCtx.beginPath();
+                    bgCtx.ellipse(0, 0, 8, 4.5, 0, 0, Math.PI * 2);
+                    bgCtx.fill();
+                    bgCtx.beginPath();
+                    bgCtx.arc(7, -4, 4, 0, Math.PI * 2);
+                    bgCtx.fill();
+                    // Dây dắt
+                    bgCtx.strokeStyle = "rgba(90, 60, 40, 0.55)";
+                    bgCtx.lineWidth = 1.2;
+                    bgCtx.beginPath();
+                    bgCtx.moveTo(-12, -16);
+                    bgCtx.lineTo(5, -4);
+                    bgCtx.stroke();
+                    bgCtx.restore();
+                }
+
+                // Chân
+                bgCtx.strokeStyle = w.pants;
+                bgCtx.lineWidth = 4.2;
+                bgCtx.lineCap = "round";
+                bgCtx.beginPath();
+                bgCtx.moveTo(-2, 8);
+                bgCtx.lineTo(-2 + legSwing, 21);
+                bgCtx.moveTo(2, 8);
+                bgCtx.lineTo(2 - legSwing, 21);
+                bgCtx.stroke();
+
+                // Tay sau
+                bgCtx.strokeStyle = "#ffd8a8";
+                bgCtx.lineWidth = 3.5;
+                bgCtx.beginPath();
+                bgCtx.moveTo(0, -5);
+                bgCtx.lineTo(-armSwing, 7);
+                bgCtx.stroke();
+
+                // Thân áo
+                bgCtx.fillStyle = w.shirt;
+                bgCtx.beginPath();
+                bgCtx.roundRect(-6, -8, 12, 17, 4);
+                bgCtx.fill();
+
+                // Đầu
+                bgCtx.fillStyle = "#ffec99";
+                bgCtx.beginPath();
+                bgCtx.arc(0, -15, 7, 0, Math.PI * 2);
+                bgCtx.fill();
+
+                // Tóc
+                bgCtx.fillStyle = w.hair;
+                bgCtx.beginPath();
+                bgCtx.arc(-1, -17, 7, Math.PI, Math.PI * 2);
+                bgCtx.fill();
+
+                // Mũ rơm hoặc ô che nắng
+                if (w.hasHat) {
+                    bgCtx.fillStyle = "#f59f00";
+                    bgCtx.beginPath();
+                    bgCtx.ellipse(0, -20, 11, 2.5, 0, 0, Math.PI * 2);
+                    bgCtx.fill();
+                    bgCtx.fillRect(-5, -25, 10, 5);
+                }
+
+                // Tay trước
+                bgCtx.strokeStyle = "#ffd8a8";
+                bgCtx.lineWidth = 3.5;
+                bgCtx.beginPath();
+                bgCtx.moveTo(0, -5);
+                bgCtx.lineTo(armSwing, 7);
+                bgCtx.stroke();
+
+                if (w.hasUmbrella) {
+                    bgCtx.strokeStyle = "#495057";
+                    bgCtx.lineWidth = 1.6;
+                    bgCtx.beginPath();
+                    bgCtx.moveTo(armSwing, 7);
+                    bgCtx.lineTo(armSwing + 2, -32);
+                    bgCtx.stroke();
+                    bgCtx.fillStyle = "#ff8787";
+                    bgCtx.beginPath();
+                    bgCtx.arc(armSwing + 2, -32, 14, Math.PI, 0);
+                    bgCtx.fill();
+                }
+
+                bgCtx.restore();
+            }
+
+            let lastTime = performance.now();
+            function animateScenery(now) {
+                const dt = Math.min((now - lastTime) / 1000, 0.05);
+                lastTime = now;
+                const time = now * 0.001;
+
+                bgCtx.clearRect(0, 0, W, H);
+
+                // Cập nhật & vẽ mây
+                for (const c of clouds) {
+                    c.x += c.speed * dt;
+                    if (c.x - 100 > W) c.x = -120;
+                    drawCloud(c);
+                }
+
+                // Vẽ đồi cỏ & đường dạo
+                drawHills(time);
+
+                // Vẽ cỏ & hoa đung đưa (lớp sau)
+                drawGrassAndFlowers(time);
+
+                // Cập nhật & vẽ người đi qua lại (sắp xếp theo laneY để có chiều sâu)
+                walkers.sort((a, b) => a.laneY - b.laneY);
+                for (const w of walkers) {
+                    w.x += w.dir * w.speed * dt;
+                    if (w.dir === 1 && w.x > W + 45) w.x = -45;
+                    if (w.dir === -1 && w.x < -45) w.x = W + 45;
+                    drawWalker(w, time);
+                }
+
+                // Bướm bay lượn
+                for (const b of butterflies) {
+                    b.x += b.vx * dt;
+                    b.y += Math.sin(time * 4 + b.phase) * 22 * dt;
+                    if (b.x > W + 20) b.x = -20;
+                    if (b.x < -20) b.x = W + 20;
+
+                    const wing = Math.abs(Math.sin(time * 12 + b.phase)) * 6 + 2;
+                    bgCtx.save();
+                    bgCtx.translate(b.x, b.y);
+                    bgCtx.fillStyle = b.color;
+                    bgCtx.beginPath();
+                    bgCtx.ellipse(-wing * 0.5, 0, wing, 4, -0.3, 0, Math.PI * 2);
+                    bgCtx.ellipse(wing * 0.5, 0, wing, 4, 0.3, 0, Math.PI * 2);
+                    bgCtx.fill();
+                    bgCtx.restore();
+                }
+
+                // Cánh hoa rơi nhẹ
+                for (const p of petals) {
+                    p.x += p.vx * dt + Math.sin(time + p.rot) * 12 * dt;
+                    p.y += p.vy * dt;
+                    p.rot += p.rotSpeed * dt;
+                    if (p.y > H + 10) {
+                        p.y = -10;
+                        p.x = Math.random() * W;
+                    }
+                    if (p.x > W + 10) p.x = -10;
+
+                    bgCtx.save();
+                    bgCtx.translate(p.x, p.y);
+                    bgCtx.rotate(p.rot);
+                    bgCtx.fillStyle = p.color;
+                    bgCtx.beginPath();
+                    bgCtx.ellipse(0, 0, p.size, p.size * 0.55, 0, 0, Math.PI * 2);
+                    bgCtx.fill();
+                    bgCtx.restore();
+                }
+
+                requestAnimationFrame(animateScenery);
+            }
+
+            requestAnimationFrame(animateScenery);
+        })();
+    </script>
 
     <script type="text/javascript" src="anhhung.js"></script>
 </body>

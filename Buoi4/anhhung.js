@@ -526,11 +526,18 @@ function capNhatAIRong(dt) {
 
 // ================= PHẦN 7: VẼ ĐỒ HỌA CHÂN THỰC TRÊN CANVAS =================
 function veSanDau() {
-    ctx.fillStyle = "#140c1c";
+    // Nền thảo nguyên xanh rêu dịu mắt để giữ độ tương phản cao cho chiêu thức
+    var bgGrad = ctx.createRadialGradient(
+        canvas.width / 2, canvas.height / 2, 40,
+        canvas.width / 2, canvas.height / 2, canvas.width * 0.7
+    );
+    bgGrad.addColorStop(0, "#235c3a");
+    bgGrad.addColorStop(1, "#163b25");
+    ctx.fillStyle = bgGrad;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Lưới gạch đá đấu trường
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.04)";
+    // Họa tiết ô cỏ nhẹ nhàng
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.045)";
     ctx.lineWidth = 1;
     for (var x = 0; x <= canvas.width; x += 40) {
         ctx.beginPath();
@@ -545,15 +552,50 @@ function veSanDau() {
         ctx.stroke();
     }
 
-    // Vòng tròn ma pháp giữa sân
+    // Các cụm cỏ & hoa nhỏ đung đưa quanh sân đấu
+    var flowerSpots = [
+        [45, 50, "#ff87b2"], [120, 35, "#ffe066"], [540, 48, "#ffffff"],
+        [575, 130, "#ffa94d"], [38, 470, "#ffe066"], [110, 505, "#ff87b2"],
+        [510, 495, "#74c0fc"], [578, 445, "#ffffff"], [310, 32, "#da77f2"],
+        [310, 508, "#ffe066"], [42, 260, "#ffffff"], [580, 270, "#ff87b2"]
+    ];
+    for (var i = 0; i < flowerSpots.length; i++) {
+        var fx = flowerSpots[i][0];
+        var fy = flowerSpots[i][1];
+        var fColor = flowerSpots[i][2];
+        var sway = Math.sin(globalTime * 2.4 + i) * 3;
+
+        // Cỏ xanh quanh bông hoa
+        ctx.strokeStyle = "rgba(105, 219, 124, 0.7)";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(fx - 4, fy + 6);
+        ctx.lineTo(fx - 6 + sway, fy - 4);
+        ctx.moveTo(fx + 4, fy + 6);
+        ctx.lineTo(fx + 6 + sway, fy - 3);
+        ctx.stroke();
+
+        // Bông hoa nhỏ
+        ctx.fillStyle = fColor;
+        ctx.beginPath();
+        ctx.arc(fx + sway, fy - 5, 4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = "#fcc419";
+        ctx.beginPath();
+        ctx.arc(fx + sway, fy - 5, 1.8, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    // Vòng tròn cổ tích giữa sân
     ctx.save();
     ctx.translate(canvas.width / 2, canvas.height / 2);
-    ctx.rotate(globalTime * 0.25);
-    ctx.strokeStyle = "rgba(255, 42, 85, 0.16)";
+    ctx.rotate(globalTime * 0.22);
+    ctx.strokeStyle = "rgba(169, 227, 75, 0.22)";
     ctx.lineWidth = 2;
     ctx.beginPath();
     ctx.arc(0, 0, 120, 0, Math.PI * 2);
     ctx.stroke();
+    ctx.strokeStyle = "rgba(255, 224, 102, 0.16)";
     ctx.strokeRect(-85, -85, 170, 170);
     ctx.restore();
 
