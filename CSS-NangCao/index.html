@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Nâng Cao (Lab 07) Portfolio | Hồ Gia Bảo - 31241023360</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/sakura-theme.css">
+</head>
+<body>
+  <nav class="topbar" aria-label="Điều hướng chính">
+    <div class="container topbar__inner">
+      <a href="index.html" class="brand">
+        <span class="brand__dot" aria-hidden="true"></span>
+        <span>Hồ Gia Bảo · CSS Nâng Cao (Lab 07)</span>
+      </a>
+      <div class="nav-links">
+        <a href="#overview">Mục tiêu</a>
+        <a href="#exercises">5 Nhóm Exercise</a>
+        <a href="#knowledge">Kiến thức đã học</a>
+        <a href="#evaluation">Tự đánh giá</a>
+        <button type="button" id="themeToggle" class="theme-btn">🌙 Giao diện Tối</button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero__grid">
+      <div class="hero__avatar-wrap">
+        <img
+          src="images/avatar.jpg"
+          alt="Ảnh đại diện Hồ Gia Bảo"
+          class="hero__avatar"
+          onerror="this.onerror=null;this.src='images/avatar.svg'"
+        >
+      </div>
+      <div class="hero__info">
+        <span class="badge">CHƯƠNG 5 &amp; 6: ADVANCED CSS – LAYOUT · LAB 07</span>
+        <h1>Hồ Gia Bảo</h1>
+        <ul class="meta-list">
+          <li><strong>MSSV:</strong> 31241023360</li>
+          <li><strong>Ngành / Khóa:</strong> Kỹ thuật Phần mềm (BIT-UEH K50)</li>
+          <li><strong>Lớp học phần:</strong> Phát triển ứng dụng TMĐT (<code>26C1INF50902702</code>)</li>
+          <li><strong>Giảng viên:</strong> TS. Nguyễn Mạnh Tuấn</li>
+          <li><strong>Email:</strong> <a href="mailto:bao.hogia@ueh.edu.vn">bao.hogia@ueh.edu.vn</a></li>
+          <li><strong>GitHub cá nhân:</strong> <a href="https://github.com/baovacai-beep" target="_blank" rel="noopener">github.com/baovacai-beep</a></li>
+        </ul>
+        <p class="hero__intro">
+          Trang Portfolio tổng hợp toàn bộ quá trình thực hành <strong>Lab 07: Advanced CSS – Layout</strong> (Nhóm 1), nối tiếp chuỗi bài tập giao diện thương mại điện tử <strong>UEHMart</strong> và JavaScript Labs. CSS nâng cao giữ vai trò xương sống trong việc kiểm soát luồng tài liệu, xây dựng bố cục đa cột chuẩn responsive trên cả Desktop lẫn Mobile, đồng thời tạo các hiệu ứng chuyển cảnh trực quan giúp nâng cao trải nghiệm mua sắm trực tuyến.
+        </p>
+        <div class="hero__stats">
+          <div class="stat-pill"><strong>05</strong> Nhóm kỹ thuật CSS</div>
+          <div class="stat-pill"><strong>19</strong> Bài thực hành (7.1–7.19)</div>
+          <div class="stat-pill"><strong>Responsive</strong> Desktop &amp; Mobile + Bootstrap</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- MỤC TIÊU THỰC HIỆN LAB 07 -->
+    <section id="overview" class="section">
+      <div class="section__header">
+        <h2 class="section__title">Mục tiêu thực hiện Lab 07 &amp; Vai trò CSS Nâng Cao</h2>
+      </div>
+      <div class="journey-grid">
+        <article class="journey-card">
+          <span class="journey-step">Kỹ thuật 01</span>
+          <h3>Luồng &amp; Định vị</h3>
+          <p>Làm chủ Document Flow, thuộc tính <code>display</code>, <code>relative</code>/<code>absolute</code> và phân tầng lớp hiển thị <code>z-index</code>.</p>
+          <a href="#exercises" class="journey-link">Nhóm 1 (7.1 – 7.4) ↓</a>
+        </article>
+
+        <article class="journey-card">
+          <span class="journey-step">Kỹ thuật 02</span>
+          <h3>Float &amp; Overlay</h3>
+          <p>Chia khối bằng <code>float</code>/<code>clear</code> và xếp lớp chú thích nổi (overlay) chính xác trên hình ảnh sản phẩm.</p>
+          <a href="#exercises" class="journey-link">Nhóm 2 (7.5 – 7.9) ↓</a>
+        </article>
+
+        <article class="journey-card">
+          <span class="journey-step">Kỹ thuật 03</span>
+          <h3>Multi-column &amp; RWD</h3>
+          <p>Dựng bố cục 2–3 cột bằng CSS, tách stylesheet Desktop/Mobile qua Media Queries và cấu hình thẻ <code>viewport</code>.</p>
+          <a href="#exercises" class="journey-link">Nhóm 3 (7.10 – 7.13) ↓</a>
+        </article>
+
+        <article class="journey-card is-current">
+          <span class="journey-step">Kỹ thuật 04 &amp; 05</span>
+          <h3>Motion &amp; Bootstrap</h3>
+          <p>Tạo tương tác mượt với <code>transform</code>, <code>transition</code>, <code>filter</code>, <code>@keyframes</code> và hệ thống lưới Bootstrap.</p>
+          <a href="#exercises" class="journey-link">Nhóm 4 &amp; 5 (7.14 – 7.19) ↓</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- DANH SÁCH & LIÊN KẾT ĐẾN TOÀN BỘ EXERCISE TRONG LAB07 -->
+    <section id="exercises" class="section">
+      <div class="section__header">
+        <h2 class="section__title">Danh sách bài thực hành Lab 07 (5 Nhóm)</h2>
+        <div class="filter-pills" role="group" aria-label="Lọc nhanh nhóm bài tập">
+          <button type="button" class="filter-pill is-active" data-filter="all">Tất cả (5 nhóm)</button>
+          <button type="button" class="filter-pill" data-filter="group1">Nhóm 1 (7.1–7.4)</button>
+          <button type="button" class="filter-pill" data-filter="group2">Nhóm 2 (7.5–7.9)</button>
+          <button type="button" class="filter-pill" data-filter="group3">Nhóm 3 (7.10–7.13)</button>
+          <button type="button" class="filter-pill" data-filter="group4">Nhóm 4 (7.14–7.18)</button>
+          <button type="button" class="filter-pill" data-filter="group5">Nhóm 5 (7.19)</button>
+        </div>
+      </div>
+
+      <div class="groups-grid">
+        <!-- NHÓM 1 -->
+        <article class="lab-card" data-group="group1">
+          <div class="lab-card__top">
+            <span class="lab-tag">Nhóm 1 · 7.1 – 7.4</span>
+            <span class="lab-count">4 Exercises</span>
+          </div>
+          <h3>Document Flow, Display &amp; Positioning</h3>
+          <p class="lab-card__desc">Kiểm soát dòng chảy phần tử mặc định, chuyển đổi hành vi block/inline, định vị relative/absolute và thứ tự chồng lớp z-index.</p>
+          <ul class="ex-link-list">
+            <li class="ex-link-item">
+              <a href="Lab07/lab07-exercise01.html">
+                <span class="ex-link-code">Exercise 7.1</span>
+                <span class="ex-link-name">Normal Document Flow &amp; Display</span>
+                <span class="ex-link-arrow">Mở →</span>
+              </a>
+            </li>
+            <li class="ex-link-item">
+              <a href="Lab07/lab07-exercise02.html">
+                <span class="ex-link-code">Exercise 7.2</span>
+                <span class="ex-link-name">Relative Positioning</span>
+                <span class="ex-link-arrow">Mở →</span>
+              </a>
+            </li>
+            <li class="ex-link-item">
+              <a href="Lab07/lab07-exercise03.html">
+                <span class="ex-link-code">Exercise 7.3</span>
+                <span class="ex-link-name">Absolute Positioning</span>
+                <span class="ex-link-arrow">Mở →</span>
+              </a>
+            </li>
+            <li class="ex-link-item">
+              <a href="Lab07/lab07-exercise04.html">
+                <span class="ex-link-code">Exercise 7.4</span>
+                <span class="ex-link-name">Layering &amp; Z-Index</span>
+                <span class="ex-link-arrow">Mở →</span>
+              </a>
+            </li>
+          </ul>
+        </article>
+
+        <!-- NHÓM 2 -->
+        <article class="lab-card" data-group="group2">
+          <div class="lab-card__top">
+            <span class="lab-tag">Nhóm 2 · 7.5 – 7.9</span>
+            <span class="lab-count">5 Exercises</span>
+          </div>
+          <h3>Float, Clear &amp; Overlay Positioning</h3>
+          <p class="lab-card__desc">Thực hành thả nổi phần tử với float, xử lý tràn khung bằng clear và gắn nhãn/chú thích chồng lớp (overlay) lên thẻ nội dung.</p>
+          <ul class="ex-link-list">
+            <li class="ex-link-item">
+              <a href="Lab07/lab07-exercise05.html">
+                <span class="ex-link-code">Exercise 7.5</span>
+                <span class="ex-link-name">Floating Elements</span>
+                <span class="ex-link-arrow">Mở →</span>
+              </a>
+            </li>
+            <li class="ex-link-item">
+              <a href="Lab07/lab07-exercise06.html">
+                <span class="ex-link-code">Exercise 7.6</span>
+                <span class="ex-link-name">Clearing Floats</span>
+                <span class="ex-link-arrow">Mở →</span>
+              </a>
+            </li>
+            <li class="ex-link-item">
+              <a href="Lab07/lab07-exercise07.html">
+                <span class="ex-link-code">Exercise 7.7</span>
+                <span class="ex-link-name">Float Layout Containment</span>
+                <span class="ex-link-arrow">Mở →</span>
+              </a>
+            </li>
+            <li class="ex-link-item">
+              <a href="Lab07/lab07-exercise08.html">
+                <span class="ex-link-code">Exercise 7.8</span>
+                <span class="ex-link-name">Overlaying Elements on Images</span>
+                <span class="ex-link-arrow">Mở →</span>
+              </a>
+            </li>
+            <li class="ex-link-item">
+              <a href="Lab07/lab07-exercise09.html">
+                <span class="ex-link-code">Exercise 7.9</span>
+                <span class="ex-link-name">Positioned Captions &amp; Badges</span>
+                <span class="ex-link-arrow">Mở →</span>
+              </a>
+            </li>
+          </ul>
+        </article>
+
+        <!-- NHÓM 3 -->
+        <article class="lab-card" data-group="group3">
+          <div class="lab-card__top">
+            <span class="lab-tag">Nhóm 3 · 7.10 – 7.13</span>
+            <span class="lab-count">4 Exercises (3 tệp HTML)</span>
+          </div>
+          <h3>Multi-column Layout, Media Queries &amp; Viewport</h3>
+          <p class="lab-card__desc">Xây dựng giao diện 2–3 cột bằng CSS, áp dụng Media Queries tách biệt Desktop/Mobile và tối ưu hiển thị trên thiết bị di động.</p>
+          <ul class="ex-link-list">
+            <li class="ex-link-item">
+              <a href="Lab07/lab07-exercise10.html">
+                <span class="ex-link-code">Exercise 7.10</span>
+                <span class="ex-link-name">Two-Column CSS Layout</span>
+                <span class="ex-link-arrow">Mở →</span>
+              </a>
+            </li>
+            <li class="ex-link-item">
+              <a href="Lab07/lab07-exercise11.html">
+                <span class="ex-link-code">Exercise 7.11</span>
+                <span class="ex-link-name">Three-Column CSS Layout</span>
+                <span class="ex-link-arrow">Mở →</span>
+              </a>
+            </li>
+            <li class="ex-link-item">
+              <a href="Lab07/lab07-exercise12.html">
+                <span class="ex-link-code">Exercise 7.12 &amp; 7.13</span>
+                <span class="ex-link-name">Responsive Media Queries, Viewport &amp; Mobile Nav</span>
+                <span class="ex-link-arrow">Mở →</span>
+              </a>
+            </li>
+          </ul>
+          <p class="group-note">
+            <strong>Lưu ý Exercise 7.13:</strong> Theo bộ tài liệu Lab 07 của giảng viên, không có tệp <code>lab07-exercise13.html</code> riêng vì nội dung Exercise 7.13 (thêm thẻ <code>&lt;meta name="viewport"&gt;</code> và tinh chỉnh thanh điều hướng cho Mobile) được tích hợp làm tiếp trực tiếp trên bộ file của <strong>Exercise 7.12</strong>.
+          </p>
+        </article>
+
+        <!-- NHÓM 4 -->
+        <article class="lab-card" data-group="group4">
+          <div class="lab-card__top">
+            <span class="lab-tag">Nhóm 4 · 7.14 – 7.18</span>
+            <span class="lab-count">5 Exercises</span>
+          </div>
+          <h3>CSS Transforms, Transitions, Filters &amp; Animations</h3>
+          <p class="lab-card__desc">Biến đổi hình học 2D/3D, làm mượt trạng thái chuyển đổi, áp dụng bộ lọc màu ảnh và tạo chuyển động lặp qua keyframes.</p>
+          <ul class="ex-link-list">
+            <li class="ex-link-item">
+              <a href="Lab07/lab07-exercise14.html">
+                <span class="ex-link-code">Exercise 7.14</span>
+                <span class="ex-link-name">CSS 2D Transforms</span>
+                <span class="ex-link-arrow">Mở →</span>
+              </a>
+            </li>
+            <li class="ex-link-item">
+              <a href="Lab07/lab07-exercise15.html">
+                <span class="ex-link-code">Exercise 7.15</span>
+                <span class="ex-link-name">CSS Transitions</span>
+                <span class="ex-link-arrow">Mở →</span>
+              </a>
+            </li>
+            <li class="ex-link-item">
+              <a href="Lab07/lab07-exercise16.html">
+                <span class="ex-link-code">Exercise 7.16</span>
+                <span class="ex-link-name">CSS Filters &amp; Image Effects</span>
+                <span class="ex-link-arrow">Mở →</span>
+              </a>
+            </li>
+            <li class="ex-link-item">
+              <a href="Lab07/lab07-exercise17.html">
+                <span class="ex-link-code">Exercise 7.17</span>
+                <span class="ex-link-name">CSS Keyframe Animations</span>
+                <span class="ex-link-arrow">Mở →</span>
+              </a>
+            </li>
+            <li class="ex-link-item">
+              <a href="Lab07/lab07-exercise18.html">
+                <span class="ex-link-code">Exercise 7.18</span>
+                <span class="ex-link-name">Combined Interactive Motion Effects</span>
+                <span class="ex-link-arrow">Mở →</span>
+              </a>
+            </li>
+          </ul>
+        </article>
+
+        <!-- NHÓM 5 -->
+        <article class="lab-card group-card--wide" data-group="group5">
+          <div class="lab-card__top">
+            <span class="lab-tag">Nhóm 5 · 7.19</span>
+            <span class="lab-count">1 Exercise</span>
+          </div>
+          <h3>Bootstrap Grid System &amp; Components</h3>
+          <p class="lab-card__desc">Làm quen với CSS Framework Bootstrap 3: tổ chức bố cục nhanh bằng hệ thống lưới 12 cột (<code>.container</code>, <code>.row</code>, <code>.col-md-*</code>) và tái sử dụng các thành phần giao diện có sẵn như thanh điều hướng, nút bấm và panel.</p>
+          <ul class="ex-link-list">
+            <li class="ex-link-item">
+              <a href="Lab07/lab07-exercise19.html">
+                <span class="ex-link-code">Exercise 7.19</span>
+                <span class="ex-link-name">Bootstrap Grid System, Navbar &amp; UI Components</span>
+                <span class="ex-link-arrow">Mở →</span>
+              </a>
+            </li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- NHỮNG KIẾN THỨC VÀ KỸ NĂNG ĐÃ HỌC ĐƯỢC -->
+    <section id="knowledge" class="section">
+      <div class="section__header">
+        <h2 class="section__title">Những kiến thức và kỹ năng đã học được</h2>
+      </div>
+
+      <div class="knowledge-list">
+        <article class="knowledge-item">
+          <h3>1. Nhóm 1 (7.1 – 7.4): Document Flow, Display, Positioning và Z-Index</h3>
+          <p>
+            Qua 4 bài đầu tiên, em nắm rõ cách trình duyệt sắp xếp phần tử theo luồng tài liệu chuẩn (Normal Flow) và sự khác biệt giữa <code>block</code>, <code>inline</code> với <code>inline-block</code>. Khi thực hành <code>position: relative</code> và <code>position: absolute</code>, em hiểu nguyên tắc lấy khung cha có định vị gần nhất làm gốc tọa độ để đặt phần tử chính xác đến từng pixel, đồng thời biết điều chỉnh <code>z-index</code> để giải quyết tình trạng che khuất giữa các lớp giao diện.
+          </p>
+        </article>
+
+        <article class="knowledge-item">
+          <h3>2. Nhóm 2 (7.5 – 7.9): Float, Clear và Overlay Positioning</h3>
+          <p>
+            Nhóm bài tập này giúp em hiểu cơ chế đẩy khối sang trái hoặc phải bằng <code>float</code> và lý do phần tử cha bị sập chiều cao nếu thiếu <code>clear</code> hoặc kỹ thuật clearfix. Đặc biệt, phần định vị chồng lớp (overlay) giúp em biết cách lồng nhãn thông tin, biểu tượng nổi hoặc thanh chú thích bán trong suốt đè gọn lên bề mặt hình ảnh mà vẫn giữ khung bố cục ngay ngắn.
+          </p>
+        </article>
+
+        <article class="knowledge-item">
+          <h3>3. Nhóm 3 (7.10 – 7.13): Multi-column Layout, Media Queries và Viewport</h3>
+          <p>
+            Thực hành chia bố cục 2 cột và 3 cột giúp em làm quen với việc tính toán tỷ lệ chiều rộng, lề và khoảng đệm sao cho tổng không vượt quá 100% khung chứa. Khi chuyển sang Exercise 7.12 và 7.13, em học được cách tách riêng <code>desktop.css</code> với <code>mobile.css</code> bằng <code>@media</code>, khai báo thẻ <code>&lt;meta name="viewport"&gt;</code> và thu gọn thanh điều hướng để trang web đọc thoải mái trên điện thoại mà không phải cuộn ngang.
+          </p>
+        </article>
+
+        <article class="knowledge-item">
+          <h3>4. Nhóm 4 (7.14 – 7.18): CSS Transforms, Transitions, Filters và Animations</h3>
+          <p>
+            Đây là nhóm bài mang lại nhiều hứng thú trực quan nhất khi em được tự tay xoay, thu phóng, dịch chuyển phần tử bằng <code>transform</code> kết hợp với <code>transition</code> để mọi thao tác rê chuột diễn ra êm dịu. Em cũng biết tận dụng <code>filter</code> (làm mờ, chỉnh độ sáng, đen trắng) cho ảnh minh họa và viết kịch bản chuyển động nhiều bước bằng <code>@keyframes</code> hoàn toàn bằng CSS thuần.
+          </p>
+        </article>
+
+        <article class="knowledge-item">
+          <h3>5. Nhóm 5 (7.19): Bootstrap Grid System và Components</h3>
+          <p>
+            Ở bài cuối cùng, em nhận ra sức mạnh tăng tốc phát triển giao diện của Bootstrap thông qua hệ thống lưới 12 cột linh hoạt theo từng kích thước màn hình. Việc sử dụng các lớp chuẩn hóa cho thanh điều hướng, lưới cột và nút bấm giúp tiết kiệm đáng kể thời gian viết CSS lặp lại mà vẫn bảo đảm tính nhất quán và khả năng co giãn responsive.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- TỰ ĐÁNH GIÁ SAU KHI HOÀN THÀNH -->
+    <section id="evaluation" class="section self-eval">
+      <div class="section__header">
+        <h2 class="section__title">Tự đánh giá sau khi hoàn thành</h2>
+      </div>
+      <p id="selfEvalText">
+        Hoàn thành chuỗi bài thực hành Lab 07 giúp em chuyển từ cách viết CSS đơn lẻ sang tư duy thiết kế bố cục hệ thống và chuẩn responsive hơn. Kỹ thuật em tâm đắc nhất là kết hợp CSS Transitions, Transforms và Filters để tạo hiệu ứng nổi thẻ sản phẩm mượt mà không cần JavaScript. Ngược lại, thử thách lớn nhất nằm ở bài bố cục 3 cột kết hợp Media Queries (Exercise 7.10–7.13), vì chỉ một sai sót nhỏ về độ rộng phần trăm, thuộc tính float hay thẻ viewport cũng dễ làm vỡ khung trên di động. Từ nền tảng này, em sẽ vận dụng lưới Bootstrap, kỹ thuật định vị overlay gắn nhãn khuyến mãi và hiệu ứng hover cho giao diện website thương mại điện tử UEHMart cũng như dự án BakeMate sắp tới.
+      </p>
+      <div class="self-eval__meta">
+        <span id="wordCountDisplay">Độ dài đoạn tự đánh giá: 140 từ (chuẩn 120–145 từ)</span>
+        <span>Học phần: Phát triển ứng dụng TMĐT (26C1INF50902702) — UEH</span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 Hồ Gia Bảo (31241023360 · UEH K50) — Học phần Phát triển ứng dụng TMĐT (26C1INF50902702) · <a href="https://github.com/baovacai-beep/Buoi4_anhhung" target="_blank" rel="noopener">GitHub Repo</a></p>
+    </div>
+  </footer>
+
+  <button type="button" id="backToTop" class="back-to-top" aria-label="Lên đầu trang">↑</button>
+  <script src="js/main.js"></script>
+  <script src="js/sakura-theme.js"></script>
+</body>
+</html>

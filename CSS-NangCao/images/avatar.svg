@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="Avatar Hồ Gia Bảo">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="55%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#60a5fa"/>
+      <stop offset="100%" stop-color="#38bdf8"/>
+    </linearGradient>
+  </defs>
+  <rect width="240" height="240" rx="120" fill="url(#bgGrad)"/>
+  <circle cx="120" cy="120" r="110" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="2"/>
+  <circle cx="190" cy="52" r="18" fill="rgba(56,189,248,0.18)"/>
+  <circle cx="52" cy="184" r="14" fill="rgba(96,165,250,0.16)"/>
+  <!-- Stylized shoulders -->
+  <path d="M56 206 C56 164, 84 148, 120 148 C156 148, 184 164, 184 206" fill="rgba(255,255,255,0.14)" stroke="rgba(255,255,255,0.28)" stroke-width="2"/>
+  <!-- Stylized head -->
+  <circle cx="120" cy="96" r="38" fill="#e2e8f0" stroke="#93c5fd" stroke-width="3"/>
+  <!-- Hair & glasses detail -->
+  <path d="M84 92 C86 64, 154 64, 156 92 C148 78, 92 78, 84 92 Z" fill="#0f172a"/>
+  <rect x="93" y="92" width="22" height="14" rx="4" fill="none" stroke="#1e3a8a" stroke-width="2.5"/>
+  <rect x="125" y="92" width="22" height="14" rx="4" fill="none" stroke="#1e3a8a" stroke-width="2.5"/>
+  <line x1="115" y1="98" x2="125" y2="98" stroke="#1e3a8a" stroke-width="2.5"/>
+  <path d="M111 116 Q120 123 129 116" fill="none" stroke="#1e3a8a" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Monogram badge -->
+  <rect x="74" y="168" width="92" height="28" rx="14" fill="url(#accentGrad)"/>
+  <text x="120" y="187" text-anchor="middle" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="800" fill="#0f172a" letter-spacing="1.5">HGB · JS</text>
+</svg>
