@@ -30,6 +30,7 @@ section {
    margin-top: 3em;
    display: flex;
    flex-wrap: wrap;
+   justify-content: center;
 }
 figure img {
    max-width: 100%;
