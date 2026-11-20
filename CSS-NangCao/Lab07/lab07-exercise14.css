@@ -1,0 +1,13 @@
+figure {
+    margin: 3em;
+    padding: 1em;
+    background: #FFCC80;
+    width: 200px;
+    /* Steps 2-3: rotate(45deg); skew(-20deg); */
+    transform: rotate(15deg);
+}
+
+figure img {
+    /* Step 4: translatex(100px) translatey(-30px); */
+    transform: rotate(45deg) scale(0.5);
+}

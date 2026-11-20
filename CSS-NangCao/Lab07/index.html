@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 07 — Advanced CSS: Layout | Hồ Gia Bảo</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/sakura-theme.css">
+  <style>
+    .lab-hero {
+      background: linear-gradient(135deg, #500724 0%, #9d174d 60%, #db2777 100%);
+      color: #fff;
+      padding: 36px 0;
+    }
+    .breadcrumb {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      font-size: 14px;
+      margin-bottom: 14px;
+      color: #fce7f3;
+    }
+    .breadcrumb a {
+      color: #fbcfe8;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    .lab-hero h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+    .lab-hero p {
+      color: #fdf2f8;
+      max-width: 780px;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="topbar" aria-label="Điều hướng Lab 07">
+    <div class="container topbar__inner">
+      <a href="../index.html" class="brand">
+        <span class="brand__dot" aria-hidden="true"></span>
+        <span>Hồ Gia Bảo · CSS Nâng Cao (Lab 07)</span>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html">← Trang chủ CSS-NangCao</a>
+        <button type="button" id="themeToggle" class="theme-btn">🌙 Giao diện Tối</button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="lab-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="../index.html">CSS-NangCao</a>
+        <span>/</span>
+        <span>Lab 07: Advanced CSS – Layout</span>
+      </div>
+      <h1>Lab 07 — Danh mục 19 bài thực hành CSS Nâng Cao</h1>
+      <p>Tổng hợp đầy đủ 18 tệp HTML (Exercise 7.1–7.12, 7.14–7.19; trong đó Exercise 7.13 tích hợp trực tiếp trên Exercise 7.12) kèm tài nguyên CSS, Bootstrap 3 và hình ảnh.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section">
+      <div class="groups-grid">
+        <article class="lab-card">
+          <div class="lab-card__top">
+            <span class="lab-tag">Nhóm 1 · 7.1 – 7.4</span>
+            <span class="lab-count">Positioning &amp; Z-Index</span>
+          </div>
+          <h3>Document Flow &amp; Positioning</h3>
+          <ul class="ex-link-list">
+            <li class="ex-link-item"><a href="lab07-exercise01.html"><span class="ex-link-code">Exercise 7.1</span><span class="ex-link-name">Document Flow &amp; Display</span><span class="ex-link-arrow">Mở →</span></a></li>
+            <li class="ex-link-item"><a href="lab07-exercise02.html"><span class="ex-link-code">Exercise 7.2</span><span class="ex-link-name">Relative Positioning</span><span class="ex-link-arrow">Mở →</span></a></li>
+            <li class="ex-link-item"><a href="lab07-exercise03.html"><span class="ex-link-code">Exercise 7.3</span><span class="ex-link-name">Absolute Positioning</span><span class="ex-link-arrow">Mở →</span></a></li>
+            <li class="ex-link-item"><a href="lab07-exercise04.html"><span class="ex-link-code">Exercise 7.4</span><span class="ex-link-name">Stacking Using Z-Index</span><span class="ex-link-arrow">Mở →</span></a></li>
+          </ul>
+        </article>
+
+        <article class="lab-card">
+          <div class="lab-card__top">
+            <span class="lab-tag">Nhóm 2 · 7.5 – 7.9</span>
+            <span class="lab-count">Float &amp; Overlay</span>
+          </div>
+          <h3>Float, Clear &amp; Overlay</h3>
+          <ul class="ex-link-list">
+            <li class="ex-link-item"><a href="lab07-exercise05.html"><span class="ex-link-code">Exercise 7.5</span><span class="ex-link-name">Floating Elements</span><span class="ex-link-arrow">Mở →</span></a></li>
+            <li class="ex-link-item"><a href="lab07-exercise06.html"><span class="ex-link-code">Exercise 7.6</span><span class="ex-link-name">Floating in a Container</span><span class="ex-link-arrow">Mở →</span></a></li>
+            <li class="ex-link-item"><a href="lab07-exercise07.html"><span class="ex-link-code">Exercise 7.7</span><span class="ex-link-name">Floating Multiple Items</span><span class="ex-link-arrow">Mở →</span></a></li>
+            <li class="ex-link-item"><a href="lab07-exercise08.html"><span class="ex-link-code">Exercise 7.8</span><span class="ex-link-name">Floating and Clearing</span><span class="ex-link-arrow">Mở →</span></a></li>
+            <li class="ex-link-item"><a href="lab07-exercise09.html"><span class="ex-link-code">Exercise 7.9</span><span class="ex-link-name">Using Positioning (Overlay)</span><span class="ex-link-arrow">Mở →</span></a></li>
+          </ul>
+        </article>
+
+        <article class="lab-card">
+          <div class="lab-card__top">
+            <span class="lab-tag">Nhóm 3 · 7.10 – 7.13</span>
+            <span class="lab-count">Layout &amp; Responsive</span>
+          </div>
+          <h3>Multi-column &amp; Media Queries</h3>
+          <ul class="ex-link-list">
+            <li class="ex-link-item"><a href="lab07-exercise10.html"><span class="ex-link-code">Exercise 7.10</span><span class="ex-link-name">Two-Column Layout</span><span class="ex-link-arrow">Mở →</span></a></li>
+            <li class="ex-link-item"><a href="lab07-exercise11.html"><span class="ex-link-code">Exercise 7.11</span><span class="ex-link-name">Three-Column Layout</span><span class="ex-link-arrow">Mở →</span></a></li>
+            <li class="ex-link-item"><a href="lab07-exercise12.html"><span class="ex-link-code">Exercise 7.12 &amp; 7.13</span><span class="ex-link-name">Media Queries, Viewport &amp; Mobile Nav</span><span class="ex-link-arrow">Mở →</span></a></li>
+          </ul>
+        </article>
+
+        <article class="lab-card">
+          <div class="lab-card__top">
+            <span class="lab-tag">Nhóm 4 &amp; 5 · 7.14 – 7.19</span>
+            <span class="lab-count">CSS3 &amp; Bootstrap</span>
+          </div>
+          <h3>Motion, Filters &amp; Bootstrap Grid</h3>
+          <ul class="ex-link-list">
+            <li class="ex-link-item"><a href="lab07-exercise14.html"><span class="ex-link-code">Exercise 7.14</span><span class="ex-link-name">CSS Transforms</span><span class="ex-link-arrow">Mở →</span></a></li>
+            <li class="ex-link-item"><a href="lab07-exercise15.html"><span class="ex-link-code">Exercise 7.15</span><span class="ex-link-name">CSS Transitions</span><span class="ex-link-arrow">Mở →</span></a></li>
+            <li class="ex-link-item"><a href="lab07-exercise16.html"><span class="ex-link-code">Exercise 7.16</span><span class="ex-link-name">More Transitions</span><span class="ex-link-arrow">Mở →</span></a></li>
+            <li class="ex-link-item"><a href="lab07-exercise17.html"><span class="ex-link-code">Exercise 7.17</span><span class="ex-link-name">CSS3 Filters</span><span class="ex-link-arrow">Mở →</span></a></li>
+            <li class="ex-link-item"><a href="lab07-exercise18.html"><span class="ex-link-code">Exercise 7.18</span><span class="ex-link-name">CSS Animations</span><span class="ex-link-arrow">Mở →</span></a></li>
+            <li class="ex-link-item"><a href="lab07-exercise19.html"><span class="ex-link-code">Exercise 7.19</span><span class="ex-link-name">Using Bootstrap</span><span class="ex-link-arrow">Mở →</span></a></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 Hồ Gia Bảo (31241023360 · UEH K50) — <a href="../index.html">Quay lại Portfolio CSS-NangCao</a></p>
+    </div>
+  </footer>
+
+  <button type="button" id="backToTop" class="back-to-top" aria-label="Lên đầu trang">↑</button>
+  <script src="../js/main.js"></script>
+  <script src="../js/sakura-theme.js"></script>
+</body>
+</html>
