@@ -1,9 +1,12 @@
-html, body, header, footer, aside, div, p, h1, h2, h3, li, ul
+html, body, header, footer, aside, nav, div, p, h1, h2, h3, li, ul
 {
    margin: 0;
    padding: 0;
    font-family: Verdana, Geneva, sans-serif;
-   font-size: 0.8em;
+}
+
+body {
+   font-size: 0.9em;
 }
 
 * {
@@ -45,8 +48,12 @@ nav ul {
 nav select {
    display: inline-block;
    width: 90%;
-   padding: 0.35em;
-   margin-top: 0.25em;
+   padding: 0.4em;
+   margin-top: 0.35em;
+   background-color: #ffffff;
+   color: #222222;
+   border: 1px solid #666666;
+   border-radius: 4px;
 }
 
 div#main {
