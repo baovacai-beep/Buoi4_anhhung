@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dâu Cute TODO — Strawberry Task & Chill Planner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <!-- Background Effects Canvas (Cánh hoa & Dâu rơi + Confetti) -->
+    <canvas id="fx-canvas" aria-hidden="true"></canvas>
+    <div id="sparkle-layer" aria-hidden="true"></div>
+
+    <!-- Cute Floating Clouds -->
+    <div class="bg-blobs" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="app-shell">
+        <!-- HEADER -->
+        <header class="glass-card top-header">
+            <div class="brand">
+                <div class="brand-logo" title="Bấm vào bé Dâu để nghe tiếng dễ thương~">
+                    <!-- Custom Cute Strawberry SVG -->
+                    <svg class="strawberry-svg mini" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M40 24C34 12 46 8 54 18C57 10 64 10 67 18C75 8 87 12 80 24" fill="#5CCB7F" stroke="#2F8F53" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M60 22C86 22 98 43 92 68C86 92 71 108 60 108C49 108 34 92 28 68C22 43 34 22 60 22Z" fill="#FF6B93" stroke="#E03E6B" stroke-width="4"/>
+                        <path d="M38 35C44 29 52 27 59 27" stroke="#FFA8C2" stroke-width="5" stroke-linecap="round"/>
+                        <!-- Seeds -->
+                        <circle cx="42" cy="48" r="2.2" fill="#FFF0F5"/>
+                        <circle cx="78" cy="48" r="2.2" fill="#FFF0F5"/>
+                        <circle cx="60" cy="42" r="2.2" fill="#FFF0F5"/>
+                        <circle cx="47" cy="84" r="2.2" fill="#FFF0F5"/>
+                        <circle cx="73" cy="84" r="2.2" fill="#FFF0F5"/>
+                        <circle cx="60" cy="94" r="2.2" fill="#FFF0F5"/>
+                        <!-- Kawaii Face -->
+                        <ellipse cx="47" cy="61" rx="4.2" ry="5" fill="#4A2C38"/>
+                        <ellipse cx="73" cy="61" rx="4.2" ry="5" fill="#4A2C38"/>
+                        <circle cx="45.5" cy="59" r="1.5" fill="#FFFFFF"/>
+                        <circle cx="71.5" cy="59" r="1.5" fill="#FFFFFF"/>
+                        <ellipse cx="38" cy="68" rx="6" ry="3.5" fill="#FF9EBB" opacity="0.85"/>
+                        <ellipse cx="82" cy="68" rx="6" ry="3.5" fill="#FF9EBB" opacity="0.85"/>
+                        <path d="M53 67C55.5 72 64.5 72 67 67" stroke="#4A2C38" stroke-width="3.2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <h1>Dâu Cute TODO <span class="badge-pill">Node.js + SQLite</span></h1>
+                    <p>Quản lý công việc ngọt ngào, chill nhẹ mỗi ngày cùng bé Dâu 🍓✨</p>
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <!-- Chill Music Player Control -->
+                <div class="music-widget" id="music-widget">
+                    <button type="button" class="btn btn-soft" id="btn-music-toggle" title="Bật/Tắt nhạc Lo-fi Chill">
+                        <span class="music-bars" aria-hidden="true">
+                            <span></span><span></span><span></span>
+                        </span>
+                        <span id="music-label">Nhạc Chill: Tắt</span>
+                    </button>
+                    <input type="range" id="music-volume" min="0" max="100" value="45" title="Âm lượng nhạc chill" aria-label="Âm lượng nhạc chill">
+                </div>
+
+                <button type="button" class="btn btn-icon-pill" id="btn-sfx-toggle" title="Bật/Tắt âm thanh dễ thương">
+                    🔔 <span class="hide-sm">Âm thanh: Bật</span>
+                </button>
+
+                <button type="button" class="btn btn-icon-pill" id="btn-fx-toggle" title="Bật/Tắt hiệu ứng dâu rơi">
+                    🌸 <span class="hide-sm">Hiệu ứng: Bật</span>
+                </button>
+
+                <button type="button" class="btn btn-primary" id="btn-open-add">
+                    <span>🍓</span> Thêm việc mới
+                </button>
+            </div>
+        </header>
+
+        <!-- SUMMARY STATS ROW -->
+        <section class="stats-grid" aria-label="Tổng quan công việc">
+            <div class="glass-card stat-card stat-total">
+                <div class="stat-icon">🍓</div>
+                <div class="stat-info">
+                    <span class="stat-label">Tổng công việc</span>
+                    <strong class="stat-value" id="stat-total">0</strong>
+                </div>
+            </div>
+            <div class="glass-card stat-card stat-todo">
+                <div class="stat-icon">🎀</div>
+                <div class="stat-info">
+                    <span class="stat-label">Chưa làm</span>
+                    <strong class="stat-value" id="stat-todo">0</strong>
+                </div>
+            </div>
+            <div class="glass-card stat-card stat-progress">
+                <div class="stat-icon">🧋</div>
+                <div class="stat-info">
+                    <span class="stat-label">Đang làm</span>
+                    <strong class="stat-value" id="stat-in-progress">0</strong>
+                </div>
+            </div>
+            <div class="glass-card stat-card stat-done">
+                <div class="stat-icon">✨</div>
+                <div class="stat-info">
+                    <span class="stat-label">Hoàn thành</span>
+                    <strong class="stat-value" id="stat-done">0</strong>
+                    <small class="stat-sub" id="stat-overdue-badge">0 quá hạn</small>
+                </div>
+            </div>
+        </section>
+
+        <!-- MAIN WORKSPACE GRID -->
+        <main class="main-grid">
+            <!-- LEFT: TODO MANAGEMENT -->
+            <section class="glass-card todo-panel">
+                <div class="panel-head">
+                    <div>
+                        <h2>Danh sách công việc</h2>
+                        <p class="panel-sub" id="list-subtitle">Đang hiển thị tất cả công việc trong SQLite</p>
+                    </div>
+                    <button type="button" class="btn btn-ghost-danger" id="btn-clear-done" title="Xóa các công việc đã hoàn thành">
+                        🧹 Dọn việc đã xong
+                    </button>
+                </div>
+
+                <!-- Quick Add Form -->
+                <form id="quick-add-form" class="quick-add-bar">
+                    <span class="quick-emoji" id="quick-sticker-btn" title="Đổi sticker dễ thương">🍓</span>
+                    <input
+                        type="text"
+                        id="quick-title"
+                        placeholder="Thêm nhanh một việc dễ thương hôm nay... (nhấn Enter)"
+                        maxlength="140"
+                        autocomplete="off"
+                    >
+                    <button type="submit" class="btn btn-primary btn-sm">+ Thêm nhanh</button>
+                </form>
+
+                <!-- Filters & Search -->
+                <div class="filters-box">
+                    <div class="status-tabs" id="status-tabs" role="tablist">
+                        <button type="button" class="tab-pill active" data-status="all">Tất cả</button>
+                        <button type="button" class="tab-pill" data-status="todo">🎀 Chưa làm</button>
+                        <button type="button" class="tab-pill" data-status="in_progress">🧋 Đang làm</button>
+                        <button type="button" class="tab-pill" data-status="done">✨ Hoàn thành</button>
+                    </div>
+
+                    <div class="filter-controls">
+                        <div class="search-wrap">
+                            <span class="search-icon">🔍</span>
+                            <input type="search" id="filter-search" placeholder="Tìm theo tên, mô tả...">
+                        </div>
+
+                        <select id="filter-category" aria-label="Lọc theo danh mục">
+                            <option value="all">📂 Mọi danh mục</option>
+                            <option value="Học tập">📚 Học tập</option>
+                            <option value="Công việc">💻 Công việc</option>
+                            <option value="Cá nhân">🌸 Cá nhân</option>
+                            <option value="Mua sắm">🛍️ Mua sắm</option>
+                            <option value="Sức khỏe">🫧 Sức khỏe</option>
+                        </select>
+
+                        <select id="filter-priority" aria-label="Lọc theo mức độ ưu tiên">
+                            <option value="all">💖 Mọi ưu tiên</option>
+                            <option value="high">🔥 Cao</option>
+                            <option value="medium">🍓 Trung bình</option>
+                            <option value="low">🌿 Thấp</option>
+                        </select>
+
+                        <select id="filter-sort" aria-label="Sắp xếp công việc">
+                            <option value="default">✨ Sắp xếp mặc định</option>
+                            <option value="newest">🆕 Mới nhất</option>
+                            <option value="due_asc">📅 Hạn gần nhất</option>
+                            <option value="priority">⚡ Ưu tiên cao trước</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Todo Cards Container -->
+                <div id="todo-list" class="todo-list" aria-live="polite">
+                    <!-- Rendered dynamically -->
+                </div>
+            </section>
+
+            <!-- RIGHT: MASCOT, ANALYTICS & CHARTS -->
+            <aside class="analytics-col">
+                <!-- Cute Strawberry Mascot & Progress -->
+                <section class="glass-card mascot-card">
+                    <div class="mascot-row">
+                        <button type="button" class="mascot-avatar" id="mascot-pet-btn" title="Chạm vào bé Dâu để nhận năng lượng tích cực!">
+                            <svg class="strawberry-svg big" id="mascot-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M40 24C34 12 46 8 54 18C57 10 64 10 67 18C75 8 87 12 80 24" fill="#5CCB7F" stroke="#2F8F53" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M60 22C86 22 98 43 92 68C86 92 71 108 60 108C49 108 34 92 28 68C22 43 34 22 60 22Z" fill="#FF6B93" stroke="#E03E6B" stroke-width="4"/>
+                                <path d="M38 35C44 29 52 27 59 27" stroke="#FFA8C2" stroke-width="5" stroke-linecap="round"/>
+                                <circle cx="42" cy="48" r="2.2" fill="#FFF0F5"/>
+                                <circle cx="78" cy="48" r="2.2" fill="#FFF0F5"/>
+                                <circle cx="60" cy="42" r="2.2" fill="#FFF0F5"/>
+                                <circle cx="47" cy="84" r="2.2" fill="#FFF0F5"/>
+                                <circle cx="73" cy="84" r="2.2" fill="#FFF0F5"/>
+                                <circle cx="60" cy="94" r="2.2" fill="#FFF0F5"/>
+                                <g class="mascot-eyes">
+                                    <ellipse cx="47" cy="61" rx="4.2" ry="5" fill="#4A2C38"/>
+                                    <ellipse cx="73" cy="61" rx="4.2" ry="5" fill="#4A2C38"/>
+                                    <circle cx="45.5" cy="59" r="1.5" fill="#FFFFFF"/>
+                                    <circle cx="71.5" cy="59" r="1.5" fill="#FFFFFF"/>
+                                </g>
+                                <ellipse cx="38" cy="68" rx="6" ry="3.5" fill="#FF9EBB" opacity="0.9"/>
+                                <ellipse cx="82" cy="68" rx="6" ry="3.5" fill="#FF9EBB" opacity="0.9"/>
+                                <path id="mascot-mouth" d="M53 67C55.5 72 64.5 72 67 67" stroke="#4A2C38" stroke-width="3.2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <div class="mascot-bubble">
+                            <span class="mascot-name">Bé Dâu Động Lực 🍓</span>
+                            <p id="mascot-quote">Chào bạn! Cùng hoàn thành thật nhiều việc cute hôm nay nhé~</p>
+                        </div>
+                    </div>
+
+                    <div class="progress-block">
+                        <div class="progress-head">
+                            <span>Tỉ lệ hoàn thành</span>
+                            <strong id="progress-percent">0%</strong>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <div class="progress-foot">
+                            <span id="due-today-text">📅 0 việc đến hạn hôm nay</span>
+                            <span id="overdue-text">⏰ 0 quá hạn</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Charts Card -->
+                <section class="glass-card charts-card">
+                    <div class="panel-head compact">
+                        <h2>Thống kê trực quan</h2>
+                        <span class="badge-soft">Live SQLite</span>
+                    </div>
+
+                    <div class="donut-layout">
+                        <div class="donut-wrap" id="donut-chart-wrap">
+                            <!-- SVG Donut rendered by app.js -->
+                        </div>
+                        <div class="donut-legend" id="donut-legend">
+                            <!-- Legend rendered by app.js -->
+                        </div>
+                    </div>
+
+                    <div class="breakdown-section">
+                        <h3>Phân bố theo danh mục</h3>
+                        <div id="category-bars" class="category-bars"></div>
+                    </div>
+
+                    <div class="breakdown-section">
+                        <h3>Theo mức độ ưu tiên</h3>
+                        <div id="priority-chips" class="priority-chips"></div>
+                    </div>
+                </section>
+
+                <!-- Recent Database Activity Logs -->
+                <section class="glass-card logs-card">
+                    <div class="panel-head compact">
+                        <h2>Nhật ký hoạt động</h2>
+                        <span class="badge-soft">Database Log</span>
+                    </div>
+                    <ul id="activity-logs" class="activity-logs">
+                        <!-- Rendered dynamically -->
+                    </ul>
+                </section>
+            </aside>
+        </main>
+    </div>
+
+    <!-- MODAL: ADD / EDIT TODO -->
+    <div class="modal-backdrop" id="todo-modal" hidden>
+        <div class="modal-card glass-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <div class="modal-head">
+                <h2 id="modal-title">🍓 Thêm công việc mới</h2>
+                <button type="button" class="btn-close" id="btn-close-modal" aria-label="Đóng">✕</button>
+            </div>
+
+            <form id="todo-form" class="todo-form">
+                <input type="hidden" id="form-id">
+
+                <div class="form-group">
+                    <label for="form-title">Tên công việc <span class="req">*</span></label>
+                    <input type="text" id="form-title" required maxlength="140" placeholder="Ví dụ: Hoàn thành báo cáo BackEnd Node.js">
+                </div>
+
+                <div class="form-group">
+                    <label for="form-description">Mô tả chi tiết</label>
+                    <textarea id="form-description" rows="3" maxlength="500" placeholder="Ghi chú nhỏ dễ thương để khỏi quên..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Chọn Sticker dễ thương</label>
+                    <div class="sticker-picker" id="sticker-picker">
+                        <button type="button" class="sticker-opt active" data-sticker="🍓">🍓</button>
+                        <button type="button" class="sticker-opt" data-sticker="🍰">🍰</button>
+                        <button type="button" class="sticker-opt" data-sticker="🧋">🧋</button>
+                        <button type="button" class="sticker-opt" data-sticker="🌸">🌸</button>
+                        <button type="button" class="sticker-opt" data-sticker="🎀">🎀</button>
+                        <button type="button" class="sticker-opt" data-sticker="✨">✨</button>
+                        <button type="button" class="sticker-opt" data-sticker="📝">📝</button>
+                        <button type="button" class="sticker-opt" data-sticker="🌷">🌷</button>
+                    </div>
+                </div>
+
+                <div class="form-row-2">
+                    <div class="form-group">
+                        <label for="form-category">Danh mục</label>
+                        <select id="form-category">
+                            <option value="Học tập">📚 Học tập</option>
+                            <option value="Công việc">💻 Công việc</option>
+                            <option value="Cá nhân">🌸 Cá nhân</option>
+                            <option value="Mua sắm">🛍️ Mua sắm</option>
+                            <option value="Sức khỏe">🫧 Sức khỏe</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="form-priority">Mức độ ưu tiên</label>
+                        <select id="form-priority">
+                            <option value="high">🔥 Cao</option>
+                            <option value="medium" selected>🍓 Trung bình</option>
+                            <option value="low">🌿 Thấp</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row-2">
+                    <div class="form-group">
+                        <label for="form-status">Trạng thái</label>
+                        <select id="form-status">
+                            <option value="todo">🎀 Chưa làm</option>
+                            <option value="in_progress">🧋 Đang làm</option>
+                            <option value="done">✨ Hoàn thành</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="form-due-date">Hạn hoàn thành</label>
+                        <input type="date" id="form-due-date">
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-soft" id="btn-cancel-modal">Hủy bỏ</button>
+                    <button type="submit" class="btn btn-primary" id="btn-save-todo">💾 Lưu công việc</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: CONFIRM DELETE -->
+    <div class="modal-backdrop" id="confirm-modal" hidden>
+        <div class="modal-card modal-sm glass-card" role="dialog" aria-modal="true">
+            <div class="confirm-icon">🍓💭</div>
+            <h2 id="confirm-title">Xóa công việc này nhé?</h2>
+            <p id="confirm-message">Công việc sẽ được xóa khỏi cơ sở dữ liệu SQLite.</p>
+            <div class="modal-actions center">
+                <button type="button" class="btn btn-soft" id="btn-confirm-cancel">Giữ lại</button>
+                <button type="button" class="btn btn-danger" id="btn-confirm-ok">Xóa luôn</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATIONS -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    <script src="/audio.js"></script>
+    <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "name": "strawberry-cute-todo",
+  "version": "1.0.0",
+  "description": "Dau Cute TODO App - Full-stack Node.js + SQLite Backend & Strawberry Pastel UI (BT Tren Lop BackEnd)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Ho Gia Bao",
+  "license": "MIT"
+}
